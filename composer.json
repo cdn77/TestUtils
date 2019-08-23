@@ -1,0 +1,34 @@
+{
+    "name": "cdn77/test-utils",
+    "description": "Cdn77 Test Utils for PHP",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Cdn77\\TestUtils\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cdn77\\TestUtils\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.2||^8.0",
+        "thecodingmachine/safe": "^0.1.16"
+    },
+    "require-dev": {
+        "cdn77/coding-standard": "^2.0",
+        "cdn77/phpstan-test-utils-rule": "dev-master@dev",
+        "jakub-onderka/php-parallel-lint": "^1.0",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.11.15",
+        "phpstan/phpstan-phpunit": "^0.11.2",
+        "phpstan/phpstan-strict-rules": "^0.11.1",
+        "phpunit/phpunit": "^8.1",
+        "thecodingmachine/phpstan-safe-rule": "^0.1.4"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

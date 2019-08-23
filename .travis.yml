@@ -1,0 +1,60 @@
+dist: xenial
+language: php
+sudo: required
+
+php:
+    - "7.2"
+    - "7.3"
+    - 7.4snapshot
+
+env:
+    - DEPENDENCIES=
+    - DEPENDENCIES=--prefer-lowest
+
+before_install:
+    - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
+
+install: COMPOSER_ARGS="--prefer-stable $DEPENDENCIES" make
+
+script: make test
+
+stages:
+    - Code Quality
+    - Test
+
+jobs:
+    allow_failures:
+        -   php: 7.4snapshot
+        -   php: nightly
+
+    include:
+        -   stage: Code Quality
+            name: Lint
+            php: "7.2"
+            script: make lint
+        -   name: Coding Standard
+            php: "7.2"
+            script: make cs
+        -   name: Static Analysis
+            php: "7.2"
+            script: make static-analysis
+
+        -   stage: Test
+            name: "PHP: nightly"
+            php: nightly
+
+        -   stage: Test
+            name: COVERAGE
+            php: "7.2"
+            before_script:
+                - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
+                - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for coverage"; exit 1; fi
+            script:
+                - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml
+            after_script:
+                - wget https://github.com/scrutinizer-ci/ocular/releases/download/1.6.0/ocular.phar
+                - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+
+cache:
+    directories:
+        - $HOME/.composer/cache
