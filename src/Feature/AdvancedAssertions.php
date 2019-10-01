@@ -56,7 +56,7 @@ trait AdvancedAssertions
                 continue;
             }
 
-            Assert::fail(sprintf("Arrays aren't same: unexpected key: %s", $key));
+            Assert::assertSame($expected, $actual, sprintf("Arrays aren't same: unexpected key: %s", $key));
         }
 
         foreach ($expected as $key => $value) {
@@ -64,7 +64,7 @@ trait AdvancedAssertions
                 continue;
             }
 
-            Assert::fail(sprintf("Arrays aren't same: missing key: %s", $key));
+            Assert::assertSame($expected, $actual, sprintf("Arrays aren't same: missing key: %s", $key));
         }
 
         if (! $ignoreOrder) {
@@ -89,7 +89,9 @@ trait AdvancedAssertions
 
                 $valueAssertionCallback($value, $actual[$key], $key);
             } catch (TypeError $error) {
-                Assert::fail(
+                Assert::assertSame(
+                    $expected,
+                    $actual,
                     sprintf(
                         "Arrays aren't same: value of unexpected type given for key \"%s\"\n%s\nGiven value: %s",
                         $key,
@@ -104,7 +106,9 @@ trait AdvancedAssertions
                     $message .= $error->getComparisonFailure()->getDiff();
                 }
 
-                Assert::fail(
+                Assert::assertSame(
+                    $expected,
+                    $actual,
                     sprintf(
                         "Arrays aren't same: assertion failed for value of key \"%s\"\n%s",
                         $key,
@@ -126,7 +130,9 @@ trait AdvancedAssertions
         $actualClass = get_class($actual);
         $expectedClass = get_class($expected);
         if ($expectedClass !== $actualClass) {
-            Assert::fail(
+            Assert::assertSame(
+                $expected,
+                $actual,
                 sprintf('Objects are not the same; expected class %s, got %s', $expectedClass, $actualClass)
             );
         }
@@ -138,7 +144,9 @@ trait AdvancedAssertions
             }
 
             $nullBytePos = strrpos($key, "\0");
-            Assert::fail(
+            Assert::assertSame(
+                $expected,
+                $actual,
                 sprintf(
                     'Objects are not the same; property "%s" is expected to be "%s", got "%s"',
                     substr($key, $nullBytePos === false ? 0 : $nullBytePos),
@@ -163,7 +171,7 @@ trait AdvancedAssertions
         if (array_keys($expected) !== array_keys($actual)) {
             $formattedMessage = self::formatAssertMessage($message, $keys, $expected, $actual);
             $formattedMessage .= "\nThe keys are different.";
-            Assert::fail($formattedMessage);
+            Assert::assertEquals($expected, $actual, $formattedMessage);
         }
 
         foreach ($expected as $key => $value) {
