@@ -12,6 +12,7 @@ use TypeError;
 use function array_key_exists;
 use function array_keys;
 use function array_merge;
+use function count;
 use function get_class;
 use function implode;
 use function is_array;
@@ -121,8 +122,6 @@ trait AdvancedAssertions
 
     protected static function assertObjectsAreIdentical(object $expected, object $actual) : void
     {
-        Assert::assertTrue(true);
-
         if ($expected === $actual) {
             return;
         }
@@ -199,7 +198,7 @@ trait AdvancedAssertions
      */
     private static function formatAssertMessage(string $message, array $keys, array $expected, array $actual) : string
     {
-        if (empty($keys)) {
+        if (count($keys) === 0) {
             $path = '';
         } else {
             $path = ' part of the array at path array[' . implode('][', $keys) . ']';
