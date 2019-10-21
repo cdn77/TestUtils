@@ -1,5 +1,5 @@
 services:
 	-
-		class: Cdn77\TestUtils\Tests\Utils\PHPStan\Extension\CreateStub
+		class: Cdn77\TestUtils\Tests\Utils\PHPStan\Extension\MakeStub
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension

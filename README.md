@@ -47,7 +47,7 @@ abstract class BasetestCase extends \PHPUnit\Framework\TestCase
 
 ### StubFactory
 
-Provides `createStub()` method to easily create objects while bypassing their constructor. 
+Provides `makeStub()` method to easily create objects while bypassing their constructor. 
 It creates instance of your object using reflection.
 
 Enable by `use StubFactory`.
@@ -79,10 +79,10 @@ class MyEntity
 ```
 
 When testing method `salute()`, you only need the tested class to have `property2` set, you don't want to worry about `property1`. 
-Therefore in your test you can initialize `MyEntity` using `createStub()` like this:
+Therefore in your test you can initialize `MyEntity` using `makeStub()` like this:
 
 ```php
-$myEntity = $this->createStub(MyEntity::class, ['property2' => 'world']);
+$myEntity = $this->makeStub(MyEntity::class, ['property2' => 'world']);
 
 self::assertSame('Hello world!', $myEntity->salute());
 ```
@@ -98,7 +98,7 @@ To enable support for [DynamicReturnTypePlugin](https://plugins.jetbrains.com/pl
     "methodCalls": [
         {
             "class": "\\Cdn77\\TestUtils\\Feature\\StubFactory",
-            "method": "createStub",
+            "method": "makeStub",
             "position": 0
         }
     ]
