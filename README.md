@@ -1,6 +1,6 @@
 # Cdn77 TestUtils
 
-[![Build Status](https://travis-ci.com/cdn77/TestUtils.svg)](https://travis-ci.com/cdn77/TestUtils)
+[![Build Status](https://travis-ci.com/cdn77/TestUtils.svg?branch=master)](https://travis-ci.com/cdn77/TestUtils)
 [![Downloads](https://poser.pugx.org/cdn77/test-utils/d/total.svg)](https://packagist.org/packages/cdn77/test-utils)
 [![Packagist](https://poser.pugx.org/cdn77/test-utils/v/stable.svg)](https://packagist.org/packages/cdn77/test-utils)
 [![Licence](https://poser.pugx.org/cdn77/test-utils/license.svg)](https://packagist.org/packages/cdn77/test-utils)
