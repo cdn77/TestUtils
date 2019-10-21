@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Cdn77\TestUtils\Tests\Feature;
 
+use Cdn77\TestUtils\Feature\StubFactory;
 use Cdn77\TestUtils\Tests\BaseTestCase;
 use ReflectionException;
 use TypeError;
 
 final class StubFactoryTest extends BaseTestCase
 {
+    use StubFactory;
+
     public function testValueIsDefaultWhenNotSet() : void
     {
         $this->expectException(TypeError::class);
