@@ -89,23 +89,6 @@ self::assertSame('Hello world!', $myEntity->salute());
 
 It comes handy when class constructor has more arguments and most of them are not required for your test. 
 
-#### DynamicReturnTypePlugin
-
-To enable support for [DynamicReturnTypePlugin](https://plugins.jetbrains.com/plugin/7251-dynamicreturntypeplugin) add this to your `dynamicReturnTypeMeta.json`:
-
-```json
-{
-    "methodCalls": [
-        {
-            "class": "\\Cdn77\\TestUtils\\Feature\\StubFactory",
-            "method": "makeStub",
-            "position": 0
-        }
-    ]
-}
-
-```
-
 ### AdvancedAssertions
 
 TBD
