@@ -28,7 +28,7 @@ trait StubFactory
     /**
      * @param mixed[] $properties
      */
-    protected function createStub(string $class, array $properties = []) : object
+    protected function makeStub(string $class, array $properties = []) : object
     {
         $reflection = new ReflectionClass($class);
 
