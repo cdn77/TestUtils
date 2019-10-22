@@ -7,6 +7,7 @@ namespace Cdn77\TestUtils\Feature;
 use DateTimeInterface;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Constraint\IsTrue;
 use PHPUnit\Framework\ExpectationFailedException;
 use TypeError;
 use function array_key_exists;
@@ -122,6 +123,8 @@ trait AdvancedAssertions
 
     protected static function assertObjectsAreIdentical(object $expected, object $actual) : void
     {
+        Assert::assertThat(true, new IsTrue()); // increase PHPUnit Assert count
+
         if ($expected === $actual) {
             return;
         }
@@ -157,6 +160,8 @@ trait AdvancedAssertions
     }
 
     /**
+     * @internal
+     *
      * @param array<string, mixed> $expected
      * @param mixed[] $actual
      * @param string[] $keys
