@@ -1,5 +1,0 @@
-services:
-	-
-		class: Cdn77\TestUtils\Tests\Utils\PHPStan\Extension\MakeStub
-		tags:
-			- phpstan.broker.dynamicMethodReturnTypeExtension
