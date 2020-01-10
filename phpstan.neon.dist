@@ -5,6 +5,4 @@ parameters:
     paths:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
-    ignoreErrors:
-        - "~Parameter #1 \\$argument of class ReflectionClass constructor expects class-string<T of object>\\|T of object, string given~"
 

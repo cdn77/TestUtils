@@ -23,8 +23,6 @@
 composer require --dev cdn77/test-utils
 ```
 
-For PHPStan support, see [cdn77/PHPStanTestUtilsRule](https://github.com/cdn77/PHPStanTestUtilsRule).
-
 ## Features
 
 The utils are separated into smaller units so you can pick only those you wish to use. Each unit is called Feature. 
