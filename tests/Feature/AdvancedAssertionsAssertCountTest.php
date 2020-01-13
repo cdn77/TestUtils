@@ -6,8 +6,8 @@ namespace Cdn77\TestUtils\Tests\Feature;
 
 use Cdn77\TestUtils\Feature\AdvancedAssertions;
 use Cdn77\TestUtils\Tests\BaseTestCase;
-use DateTimeImmutable;
 use PHPUnit\Framework\Assert;
+use Safe\DateTimeImmutable;
 use stdClass;
 
 final class AdvancedAssertionsAssertCountTest extends BaseTestCase

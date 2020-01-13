@@ -1,7 +1,10 @@
 parameters:
     bootstrap: %currentWorkingDirectory%/tests/bootstrap.php
-    memory-limit: -1
+    checkGenericClassInNonGenericObjectType: false
     level: max
     paths:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
+    ignoreErrors:
+        - "~Parameter #1 \\$argument of class ReflectionClass constructor expects class-string<T of object>\\|T of object, string given~"
+
