@@ -12,7 +12,6 @@
 - [Installation](#installation)
 - [Features](#features)
   - [StubFactory](#stub-factory)
-    - [DynamicReturnTypePlugin](#dynamic-return-type-plugin)
   - [AdvancedAssertions](#advanced-assertions)
 
 ## Installation
