@@ -26,7 +26,11 @@ trait StubFactory
     }
 
     /**
-     * @param mixed[] $properties
+     * @param array<mixed> $properties
+     *
+     * @phpstan-template T of object
+     * @phpstan-param    class-string<T> $class
+     * @phpstan-return   T
      */
     protected function makeStub(string $class, array $properties = []) : object
     {
