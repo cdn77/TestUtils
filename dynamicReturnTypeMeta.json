@@ -1,9 +1,0 @@
-{
-    "methodCalls": [
-        {
-            "class": "\\Cdn77\\TestUtils\\Feature\\StubFactory",
-            "method": "makeStub",
-            "position": 0
-        }
-    ]
-}
