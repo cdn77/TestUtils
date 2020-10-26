@@ -1,11 +1,8 @@
 # Cdn77 TestUtils
 
-[![Build Status](https://travis-ci.com/cdn77/TestUtils.svg?branch=master)](https://travis-ci.com/cdn77/TestUtils)
-[![Downloads](https://poser.pugx.org/cdn77/test-utils/d/total.svg)](https://packagist.org/packages/cdn77/test-utils)
-[![Packagist](https://poser.pugx.org/cdn77/test-utils/v/stable.svg)](https://packagist.org/packages/cdn77/test-utils)
-[![Licence](https://poser.pugx.org/cdn77/test-utils/license.svg)](https://packagist.org/packages/cdn77/test-utils)
-[![Quality Score](https://scrutinizer-ci.com/g/cdn77/TestUtils/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cdn77/TestUtils)
-[![Code Coverage](https://scrutinizer-ci.com/g/cdn77/TestUtils/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/cdn77/TestUtils)
+[![Build Status](https://github.com/cdn77/TestUtils/workflows/CI/badge.svg?branch=master)](https://github.com/cdn77/TestUtils/actions)
+[![Coverage Status](https://coveralls.io/repos/github/cdn77/TestUtils/badge.svg?branch=master)](https://coveralls.io/github/cdn77/TestUtils?branch=master)
+[![Downloads](https://poser.pugx.org/simpod/clickhouse-client/d/total.svg)](https://packagist.org/packages/simpod/clickhouse-client)
 
 ## Contents
 
