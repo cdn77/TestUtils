@@ -32,9 +32,7 @@ final class AdvancedAssertionsTest extends BaseTestCase
         }
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function providerAssertSameWithEqualDateTimesDoesntThrowAssertionFailedError() : iterable
     {
         $dateTimeA = new DateTimeImmutable('2017-09-13 12:55:12');
@@ -83,9 +81,7 @@ final class AdvancedAssertionsTest extends BaseTestCase
         self::assertSameWithEqualDateTimes($expected, $actual);
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function providerAssertSameWithEqualDateTimesThrowsAssertionFailedError() : iterable
     {
         $dateTimeA = new DateTimeImmutable('2017-09-13 12:55:12');

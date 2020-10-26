@@ -10,6 +10,7 @@ use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\IsTrue;
 use PHPUnit\Framework\ExpectationFailedException;
 use TypeError;
+
 use function array_key_exists;
 use function array_keys;
 use function array_merge;

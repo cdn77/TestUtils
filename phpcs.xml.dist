@@ -3,9 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
 >
-    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="cache" value=".phpcs-cache" />
 
-    <rule ref="Cdn77CodingStandard"/>
+    <rule ref="Cdn77">
+        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
+    </rule>
 
     <file>src/</file>
     <file>tests/</file>

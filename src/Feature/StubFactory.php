@@ -7,6 +7,7 @@ namespace Cdn77\TestUtils\Feature;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
+
 use function Safe\sprintf;
 
 trait StubFactory

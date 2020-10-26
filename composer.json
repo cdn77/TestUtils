@@ -18,12 +18,11 @@
         "thecodingmachine/safe": "^1.0.2"
     },
     "require-dev": {
-        "cdn77/coding-standard": "dev-master#99b5427 as 3.0.0",
-        "jakub-onderka/php-parallel-lint": "^1.0",
+        "cdn77/coding-standard": "^4.0",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "0.12.5",
-        "phpstan/phpstan-phpunit": "0.12.6",
-        "phpstan/phpstan-strict-rules": "0.12.1",
+        "phpstan/phpstan": "0.12.52",
+        "phpstan/phpstan-phpunit": "0.12.16",
+        "phpstan/phpstan-strict-rules": "0.12.5",
         "phpunit/phpunit": "^8.5",
         "thecodingmachine/phpstan-safe-rule": "^1.0"
     },

@@ -28,10 +28,6 @@ vendor/lock: composer.json
 test:
 	vendor/bin/phpunit $(PHPUNIT_ARGS)
 
-.PHONY: lint
-lint:
-	vendor/bin/parallel-lint --exclude vendor .
-
 .PHONY: cs
 cs:
 	vendor/bin/phpcs
@@ -45,7 +41,7 @@ static-analysis:
 	vendor/bin/phpstan analyse
 
 .PHONY: check
-check: build lint cs static-analysis test
+check: build cs static-analysis test
 
 ### END
 
