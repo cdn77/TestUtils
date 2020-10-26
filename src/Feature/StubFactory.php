@@ -12,12 +12,20 @@ use function Safe\sprintf;
 
 trait StubFactory
 {
+    /**
+     * @phpstan-template T of object
+     * @phpstan-param    ReflectionClass<T> $class
+     */
     private static function getClosestProperty(ReflectionClass $class, string $property) : ?ReflectionProperty
     {
         if ($class->hasProperty($property)) {
             return $class->getProperty($property);
         }
 
+        /**
+         * @phpstan-template T of object
+         * @phpstan-var ReflectionClass<T>|false $parentClass
+         */
         $parentClass = $class->getParentClass();
         if ($parentClass === false) {
             return null;

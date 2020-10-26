@@ -30,7 +30,7 @@ test:
 
 .PHONY: cs
 cs:
-	vendor/bin/phpcs
+	vendor/bin/phpcs $(PHPCS_ARGS)
 
 .PHONY: fix
 fix:
@@ -38,7 +38,7 @@ fix:
 
 .PHONY: static-analysis
 static-analysis:
-	vendor/bin/phpstan analyse
+	vendor/bin/phpstan analyse $(PHPSTAN_ARGS)
 
 .PHONY: check
 check: build cs static-analysis test

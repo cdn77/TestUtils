@@ -1,6 +1,4 @@
 parameters:
-    bootstrap: %currentWorkingDirectory%/tests/bootstrap.php
-    checkGenericClassInNonGenericObjectType: false
     level: max
     paths:
         - %currentWorkingDirectory%/src
