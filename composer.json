@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "php": "^7.2||^8.0",
+        "php": "^7.3||^8.0",
         "thecodingmachine/safe": "^1.0.2"
     },
     "require-dev": {
