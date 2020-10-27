@@ -18,7 +18,7 @@ final class StubFactoryTest extends BaseTestCase
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('null returned');
 
-        $stub = $this->makeStub(SimpleClass::class);
+        $stub = self::makeStub(SimpleClass::class);
 
         $stub->getProperty1();
 
@@ -27,14 +27,14 @@ final class StubFactoryTest extends BaseTestCase
 
     public function testPropertyIsSetBypassingConstructor() : void
     {
-        $stub = $this->makeStub(SimpleClass::class, ['property1' => 'value']);
+        $stub = self::makeStub(SimpleClass::class, ['property1' => 'value']);
 
         self::assertSame('value', $stub->getProperty1());
     }
 
     public function testParentPropertyIsSetBypassingConstructor() : void
     {
-        $stub = $this->makeStub(SimpleClass::class, ['parentProperty' => 'value']);
+        $stub = self::makeStub(SimpleClass::class, ['parentProperty' => 'value']);
 
         self::assertSame('value', $stub->getParentProperty());
     }
@@ -44,6 +44,6 @@ final class StubFactoryTest extends BaseTestCase
         $this->expectException(ReflectionException::class);
         $this->expectExceptionMessage('Property "nonexistentProperty" not found');
 
-        $this->makeStub(SimpleClass::class, ['nonexistentProperty' => 'value']);
+        self::makeStub(SimpleClass::class, ['nonexistentProperty' => 'value']);
     }
 }

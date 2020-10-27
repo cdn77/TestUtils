@@ -13,6 +13,31 @@ use function Safe\sprintf;
 trait StubFactory
 {
     /**
+     * @param array<mixed> $properties
+     *
+     * @phpstan-template T of object
+     * @phpstan-param    class-string<T> $class
+     * @phpstan-return   T
+     */
+    protected static function makeStub(string $class, array $properties = []) : object
+    {
+        $reflection = new ReflectionClass($class);
+
+        $stub = $reflection->newInstanceWithoutConstructor();
+        foreach ($properties as $property => $value) {
+            $reflectionProperty = self::getClosestProperty($reflection, $property);
+            if ($reflectionProperty === null) {
+                throw new ReflectionException(sprintf('Property "%s" not found', $property));
+            }
+
+            $reflectionProperty->setAccessible(true);
+            $reflectionProperty->setValue($stub, $value);
+        }
+
+        return $stub;
+    }
+
+    /**
      * @phpstan-template T of object
      * @phpstan-param    ReflectionClass<T> $class
      */
@@ -32,30 +57,5 @@ trait StubFactory
         }
 
         return self::getClosestProperty($parentClass, $property);
-    }
-
-    /**
-     * @param array<mixed> $properties
-     *
-     * @phpstan-template T of object
-     * @phpstan-param    class-string<T> $class
-     * @phpstan-return   T
-     */
-    protected function makeStub(string $class, array $properties = []) : object
-    {
-        $reflection = new ReflectionClass($class);
-
-        $stub = $reflection->newInstanceWithoutConstructor();
-        foreach ($properties as $property => $value) {
-            $reflectionProperty = self::getClosestProperty($reflection, $property);
-            if ($reflectionProperty === null) {
-                throw new ReflectionException(sprintf('Property "%s" not found', $property));
-            }
-
-            $reflectionProperty->setAccessible(true);
-            $reflectionProperty->setValue($stub, $value);
-        }
-
-        return $stub;
     }
 }
