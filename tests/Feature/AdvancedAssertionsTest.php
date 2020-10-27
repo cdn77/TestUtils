@@ -76,7 +76,7 @@ final class AdvancedAssertionsTest extends BaseTestCase
         string $expectedMessage
     ) : void {
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageRegExp($expectedMessage);
+        $this->expectExceptionMessageMatches($expectedMessage);
 
         self::assertSameWithEqualDateTimes($expected, $actual);
     }
