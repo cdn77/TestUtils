@@ -3,7 +3,6 @@ language: php
 sudo: required
 
 php:
-    - "7.2"
     - "7.3"
     - 7.4snapshot
 
@@ -29,10 +28,10 @@ jobs:
 
     include:
         -   name: Coding Standard
-            php: "7.2"
+            php: "7.3"
             script: make cs
         -   name: Static Analysis
-            php: "7.2"
+            php: "7.3"
             script: make static-analysis
 
         -   stage: Test
@@ -41,7 +40,7 @@ jobs:
 
         -   stage: Test
             name: COVERAGE
-            php: "7.2"
+            php: "7.3"
             before_script:
                 - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
                 - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for coverage"; exit 1; fi
