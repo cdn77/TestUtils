@@ -76,7 +76,7 @@ When testing method `salute()`, you only need the tested class to have `property
 Therefore in your test you can initialize `MyEntity` using `makeStub()` like this:
 
 ```php
-$myEntity = $this->makeStub(MyEntity::class, ['property2' => 'world']);
+$myEntity = self::makeStub(MyEntity::class, ['property2' => 'world']);
 
 self::assertSame('Hello world!', $myEntity->salute());
 ```
