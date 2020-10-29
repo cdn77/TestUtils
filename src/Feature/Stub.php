@@ -10,7 +10,7 @@ use ReflectionProperty;
 
 use function Safe\sprintf;
 
-trait StubFactory
+final class Stub
 {
     /**
      * @param array<mixed> $properties
@@ -19,7 +19,7 @@ trait StubFactory
      * @phpstan-param    class-string<T> $class
      * @phpstan-return   T
      */
-    protected static function makeStub(string $class, array $properties = []) : object
+    public static function create(string $class, array $properties = []) : object
     {
         $reflection = new ReflectionClass($class);
 

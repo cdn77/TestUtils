@@ -8,8 +8,8 @@
 
 - [Installation](#installation)
 - [Features](#features)
-  - [StubFactory](#stub-factory)
-  - [AdvancedAssertions](#advanced-assertions)
+  - [Stub](#stub)
+  - [AdvancedAssert](#advanced-assert)
 
 ## Installation
 
@@ -21,30 +21,9 @@ composer require --dev cdn77/test-utils
 
 ## Features
 
-The utils are separated into smaller units so you can pick only those you wish to use. Each unit is called Feature. 
-Usually there's some `BaseTestCase` in your code base. Enable each Feature by using its trait there.
+### Stub
 
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace Your\Project\Tests;
-
-use Cdn77\TestUtils\Feature\StubFactory;
-
-abstract class BasetestCase extends \PHPUnit\Framework\TestCase 
-{
-    use StubFactory; 
-}
-```
-
-### StubFactory
-
-Provides `makeStub()` method to easily create objects while bypassing their constructor. 
-It creates instance of your object using reflection.
-
-Enable by `use StubFactory`.
+Factory to create object through Reflection in order to bypass the constructor.
 
 ----------------
 
@@ -73,16 +52,16 @@ class MyEntity
 ```
 
 When testing method `salute()`, you only need the tested class to have `property2` set, you don't want to worry about `property1`. 
-Therefore in your test you can initialize `MyEntity` using `makeStub()` like this:
+Therefore in your test you can initialize `MyEntity` using `Stub::create()` like this:
 
 ```php
-$myEntity = self::makeStub(MyEntity::class, ['property2' => 'world']);
+$myEntity = Stub::create(MyEntity::class, ['property2' => 'world']);
 
 self::assertSame('Hello world!', $myEntity->salute());
 ```
 
 It comes handy when class constructor has more arguments and most of them are not required for your test. 
 
-### AdvancedAssertions
+### AdvancedAssert
 
 TBD

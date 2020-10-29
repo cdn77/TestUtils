@@ -4,34 +4,32 @@ declare(strict_types=1);
 
 namespace Cdn77\TestUtils\Tests\Feature;
 
-use Cdn77\TestUtils\Feature\AdvancedAssertions;
+use Cdn77\TestUtils\Feature\AdvancedAssert;
 use Cdn77\TestUtils\Tests\BaseTestCase;
 use PHPUnit\Framework\Assert;
 use Safe\DateTimeImmutable;
 use stdClass;
 
-final class AdvancedAssertionsAssertCountTest extends BaseTestCase
+final class AdvancedAssertAssertCountTest extends BaseTestCase
 {
-    use AdvancedAssertions;
-
     public function testAssertSameWithEqualDateTimesIncreasesAssertCountBy1() : void
     {
         $now = new DateTimeImmutable();
-        self::assertSameWithEqualDateTimes([$now], [$now]);
+        AdvancedAssert::assertSameWithEqualDateTimes([$now], [$now]);
 
         Assert::assertSame(1, Assert::getCount());
     }
 
     public function testAssertArraysAreSameIncreasesAssertCountBy1() : void
     {
-        self::assertArraysAreSame([], []);
+        AdvancedAssert::assertArraysAreSame([], []);
 
         Assert::assertSame(1, Assert::getCount());
     }
 
     public function testAssertObjectsAreIdenticalIncreasesAssertCountBy1() : void
     {
-        self::assertObjectsAreIdentical(new stdClass(), new stdClass());
+        AdvancedAssert::assertObjectsAreIdentical(new stdClass(), new stdClass());
 
         Assert::assertSame(1, Assert::getCount());
     }

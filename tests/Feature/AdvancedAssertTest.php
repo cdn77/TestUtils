@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Cdn77\TestUtils\Tests\Feature;
 
-use Cdn77\TestUtils\Feature\AdvancedAssertions;
+use Cdn77\TestUtils\Feature\AdvancedAssert;
 use Cdn77\TestUtils\Tests\BaseTestCase;
 use PHPUnit\Framework\AssertionFailedError;
 use Safe\DateTimeImmutable;
 
-final class AdvancedAssertionsTest extends BaseTestCase
+final class AdvancedAssertTest extends BaseTestCase
 {
-    use AdvancedAssertions;
-
     /**
      * @param mixed[] $expected
      * @param mixed[] $actual
@@ -24,7 +22,7 @@ final class AdvancedAssertionsTest extends BaseTestCase
         array $actual
     ) : void {
         try {
-            self::assertSameWithEqualDateTimes($expected, $actual);
+            AdvancedAssert::assertSameWithEqualDateTimes($expected, $actual);
         } catch (AssertionFailedError $exception) {
             $message = "AssertionFailedError was thrown when it wasn't supposed to be."
                 . " Exception message: \n" . $exception->getMessage();
@@ -78,7 +76,7 @@ final class AdvancedAssertionsTest extends BaseTestCase
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageMatches($expectedMessage);
 
-        self::assertSameWithEqualDateTimes($expected, $actual);
+        AdvancedAssert::assertSameWithEqualDateTimes($expected, $actual);
     }
 
     /** @return mixed[] */
