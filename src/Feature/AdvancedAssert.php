@@ -23,17 +23,14 @@ use function Safe\substr;
 use function strrpos;
 use function var_export;
 
-trait AdvancedAssertions
+final class AdvancedAssert
 {
     /**
      * @param mixed[] $expected
      * @param mixed[] $actual
      */
-    protected static function assertSameWithEqualDateTimes(
-        array $expected,
-        array $actual,
-        ?string $message = null
-    ) : void {
+    public static function assertSameWithEqualDateTimes(array $expected, array $actual, ?string $message = null) : void
+    {
         $assertMessage = 'Failed asserting that%s: %s is identical to: %s';
         if ($message === null) {
             $message = $assertMessage;
@@ -48,7 +45,7 @@ trait AdvancedAssertions
      * @param mixed[] $expected
      * @param mixed[] $actual
      */
-    protected static function assertArraysAreSame(
+    public static function assertArraysAreSame(
         array $expected,
         array $actual,
         bool $ignoreOrder = false,
@@ -122,7 +119,7 @@ trait AdvancedAssertions
         }
     }
 
-    protected static function assertObjectsAreIdentical(object $expected, object $actual) : void
+    public static function assertObjectsAreIdentical(object $expected, object $actual) : void
     {
         Assert::assertThat(true, new IsTrue()); // increase PHPUnit Assert count
 
@@ -161,8 +158,6 @@ trait AdvancedAssertions
     }
 
     /**
-     * @internal
-     *
      * @param array<string, mixed> $expected
      * @param mixed[] $actual
      * @param string[] $keys
