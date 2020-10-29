@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/cdn77/TestUtils/workflows/CI/badge.svg?branch=master)](https://github.com/cdn77/TestUtils/actions)
 [![Coverage Status](https://coveralls.io/repos/github/cdn77/TestUtils/badge.svg?branch=master)](https://coveralls.io/github/cdn77/TestUtils?branch=master)
-[![Downloads](https://poser.pugx.org/simpod/clickhouse-client/d/total.svg)](https://packagist.org/packages/simpod/clickhouse-client)
+[![Downloads](https://poser.pugx.org/cdn77/test-utils/d/total.svg)](https://packagist.org/packages/cdn77/test-utils)
 
 ## Contents
 
