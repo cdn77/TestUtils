@@ -9,6 +9,7 @@
 - [Installation](#installation)
 - [Features](#features)
   - [Stub](#stub)
+  - [Test Checks](#test-checks)
   - [AdvancedAssert](#advanced-assert)
 
 ## Installation
@@ -70,6 +71,170 @@ $myEntity = Stub::extends($myEntity, ['property1' => 'value']);
 
 // property 1 and 2 are set now
 self::assertSame('Hello world!', $myEntity->salute());
+```
+
+### Test Checks
+
+Test Checks are used to assert that tests comply with your suite's standards (are final, extend correct TestCaseBase etc.)
+
+To run them, eg. create a test case like in the following example: 
+
+```php
+<?php
+
+use Cdn77\TestUtils\TestCheck\TestCheck;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * @group       integration
+ * @testedClass none
+ */
+final class SuiteComplianceTest extends TestCaseBase
+{
+    /** @dataProvider providerChecks */
+    public function testChecks(TestCheck $check) : void
+    {
+        $check->run($this);
+    }
+
+    /** @return Generator<string, array{callable(self): TestCheck}> */
+    public function providerChecks() : Generator
+    {
+        $testDir = ROOT_PROJECT_DIR . '/tests';
+        $testFilePathNames = \Symfony\Component\Finder\Finder::create()
+            ->in($testDir)
+            ->files()
+            ->name('*Test.php');
+
+        yield 'Every test has group' => [
+            new EveryTestHasGroup($testFilePathNames),
+        ];
+        
+        ...
+    }
+}
+```
+
+### Every test has group
+
+Asserts that all tests have a `@group` annotation 
+
+:x:
+```php
+final class FooTest extends TestCase
+```
+
+:heavy_check_mark:
+```php
+/** @group unit */
+final class FooTest extends TestCase
+```
+
+Configured in test provider as
+
+```php
+yield 'Every test has group' => [
+    new EveryTestHasGroup($testFiles),
+];
+```
+
+### Every test has same namespace as tested class
+
+Asserts that all test share same namespace with class they're testing.  
+Consider src namespace `Ns` and test namespace `Ns/Tests` then for test `Ns/Tests/UnitTest` must exist class `Ns/Unit`. 
+
+You can use `@testedClass` annotation to link test with tested class
+
+```php
+namespace Ns;
+
+final class Unit {} 
+```
+
+:x:
+```php
+namespace Ns\Tests;
+
+final class NonexistentUnitTest extends TestCase {}
+```
+
+```php
+namespace Ns\Tests\Sub;
+
+final class UnitTest extends TestCase {}
+```
+
+:heavy_check_mark:
+```php
+namespace Ns\Tests;
+
+final class UnitTest extends TestCase {}
+```
+
+```php
+namespace Ns\Tests\Sub;
+
+/** @testedClass \Ns\Unit */
+final class UnitTest extends TestCase {}
+```
+
+Configured in test provider as
+
+```php
+yield 'Every test has same namespace as tested class' => [
+    new EveryTestHasSameNamespaceAsTestedClass($testFiles),
+];
+```
+
+### Every test inherits from testcase base class
+
+Consider you have a base for all tests and want each of them extend it.
+
+```php
+abstract class TestCaseBase extends \PHPUnit\Framework\TestCase {}
+```
+
+:x:
+```php
+final class FooTest extends \PHPUnit\Framework\TestCase
+```
+
+:heavy_check_mark:
+```php
+final class FooTest extends TestCaseBase
+```
+
+Configured in test provider as
+
+```php
+yield 'Every test inherits from TestCase Base Class' => [
+    new EveryTestInheritsFromTestCaseBaseClass(
+        $testFiles,
+        TestCaseBase::class
+    ),
+];
+```
+
+### Every test is final
+
+Asserts all tests are final so they cannot be extended
+
+:x:
+```php
+class FooTest extends TestCase
+```
+
+:heavy_check_mark:
+```php
+final class FooTest extends TestCase
+```
+
+Configured in test provider as
+
+```php
+yield 'Every test is final' => [
+    new EveryTestIsFinal($testFiles),
+];
 ```
 
 ### AdvancedAssert
