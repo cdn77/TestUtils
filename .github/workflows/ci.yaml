@@ -13,6 +13,7 @@ jobs:
         strategy:
             matrix:
                 php-version: [7.4]
+                dependencies: ["", --prefer-lowest]
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
@@ -25,12 +26,12 @@ jobs:
                 uses: actions/cache@v1
                 with:
                     path: ~/.composer/cache
-                    key: php-${{ matrix.php-version }}
+                    key: php-${{ matrix.php-version }}-dependencies-${{ matrix.dependencies }}
                     restore-keys: php-${{ matrix.php-version }}
 
             -   name: Install dependencies with composer
                 env:
-                    COMPOSER_ARGS: "--prefer-stable"
+                    COMPOSER_ARGS: "--prefer-stable ${{ matrix.dependencies }}"
                 run: make
 
             -   name: Run a static analysis with phpstan/phpstan

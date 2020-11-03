@@ -3,3 +3,5 @@ parameters:
     paths:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
+    ignoreErrors:
+        - "~Call to static method PHPUnit\\\\Framework\\\\Assert::assertTrue\\(\\) with true will always evaluate to true~"
