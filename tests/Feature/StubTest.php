@@ -44,4 +44,14 @@ final class StubTest extends BaseTestCase
 
         Stub::create(SimpleClass::class, ['nonexistentProperty' => 'value']);
     }
+
+    public function testExtend() : void
+    {
+        $stub = Stub::create(SimpleClass::class, ['property1' => 'value']);
+
+        $stub = Stub::extend($stub, ['property2' => 'value2']);
+
+        self::assertSame('value', $stub->getProperty1());
+        self::assertSame('value2', $stub->getProperty2());
+    }
 }
