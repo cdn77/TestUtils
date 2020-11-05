@@ -60,7 +60,17 @@ $myEntity = Stub::create(MyEntity::class, ['property2' => 'world']);
 self::assertSame('Hello world!', $myEntity->salute());
 ```
 
-It comes handy when class constructor has more arguments and most of them are not required for your test. 
+It comes handy when class constructor has more arguments and most of them are not required for your test.
+
+It is possible to extend stubs:
+
+```php
+$myEntity = Stub::create(MyEntity::class, ['property2' => 'world']);
+$myEntity = Stub::extends($myEntity, ['property1' => 'value']);
+
+// property 1 and 2 are set now
+self::assertSame('Hello world!', $myEntity->salute());
+```
 
 ### AdvancedAssert
 
