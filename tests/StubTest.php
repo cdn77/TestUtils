@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cdn77\TestUtils\Tests\Feature;
+namespace Cdn77\TestUtils\Tests;
 
-use Cdn77\TestUtils\Feature\Stub;
-use Cdn77\TestUtils\Tests\BaseTestCase;
+use Cdn77\TestUtils\Stub;
 use ReflectionException;
 use TypeError;
 
