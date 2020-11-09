@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cdn77\TestUtils\Tests\Feature;
+namespace Cdn77\TestUtils\Tests;
 
-use Cdn77\TestUtils\Feature\AdvancedAssert;
-use Cdn77\TestUtils\Tests\BaseTestCase;
+use Cdn77\TestUtils\AdvancedAssert;
 use PHPUnit\Framework\AssertionFailedError;
 use Safe\DateTimeImmutable;
 

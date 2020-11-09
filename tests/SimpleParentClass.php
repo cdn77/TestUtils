@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cdn77\TestUtils\Tests\Feature;
+namespace Cdn77\TestUtils\Tests;
 
 class SimpleParentClass
 {
