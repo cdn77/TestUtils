@@ -17,9 +17,9 @@ final class Stub
     /**
      * @param array<string, mixed> $properties
      *
-     * @phpstan-template T of object
-     * @phpstan-param    class-string<T> $class
-     * @phpstan-return   T
+     * @template T of object
+     * @psalm-param class-string<T> $class
+     * @psalm-return T
      */
     public static function create(string $class, array $properties = []) : object
     {
@@ -42,9 +42,9 @@ final class Stub
     /**
      * @param array<string, mixed> $newProperties
      *
-     * @phpstan-template T of object
-     * @phpstan-param    T $stub
-     * @phpstan-return   T
+     * @template T of object
+     * @psalm-param T $stub
+     * @psalm-return T
      */
     public static function extend(object $stub, array $newProperties = []) : object
     {
@@ -65,8 +65,8 @@ final class Stub
     }
 
     /**
-     * @phpstan-template T of object
-     * @phpstan-param    ReflectionClass<T> $class
+     * @template T of object
+     * @psalm-param ReflectionClass<T> $class
      */
     private static function getClosestProperty(ReflectionClass $class, string $property) : ?ReflectionProperty
     {
@@ -75,8 +75,8 @@ final class Stub
         }
 
         /**
-         * @phpstan-template T of object
-         * @phpstan-var ReflectionClass<T>|false $parentClass
+         * @template T of object
+         * @psalm-var ReflectionClass<T>|false $parentClass
          */
         $parentClass = $class->getParentClass();
         if ($parentClass === false) {
