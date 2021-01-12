@@ -46,14 +46,29 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
                 );
             }
 
-            if ($parentClassReflection->getName() === $this->testCaseBaseClass) {
-                continue;
-            }
-
             if ($classReflection->getName() === $this->testCaseBaseClass) {
                 continue;
             }
 
+            $this->assertParentClass($testCaseContext, $classReflection, $parentClassReflection);
+        }
+    }
+
+    /**
+     * @param ReflectionClass<object> $classReflection
+     * @param ReflectionClass<TestCase> $parentClassReflection
+     */
+    private function assertParentClass(
+        TestCase $testCaseContext,
+        ReflectionClass $classReflection,
+        ReflectionClass $parentClassReflection
+    ) : void {
+        if ($parentClassReflection->getName() === $this->testCaseBaseClass) {
+            return;
+        }
+
+        $parentClassReflection = $parentClassReflection->getParentClass();
+        if ($parentClassReflection === false) {
             $testCaseContext::fail(
                 sprintf(
                     'Test "%s" is extending different class than expected, use "%s" as the base class',
@@ -62,5 +77,7 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
                 )
             );
         }
+
+        $this->assertParentClass($testCaseContext, $classReflection, $parentClassReflection);
     }
 }

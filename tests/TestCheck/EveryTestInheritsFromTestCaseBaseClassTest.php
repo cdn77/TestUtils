@@ -25,6 +25,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     public function providerSuccess() : Generator
     {
         yield ['ExtendsBase.php'];
+        yield ['ExtendsBaseUsingParent.php'];
         yield ['../../BaseTestCase.php'];
     }
 
