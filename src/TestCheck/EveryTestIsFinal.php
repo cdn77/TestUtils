@@ -13,7 +13,7 @@ use function Safe\sprintf;
 final class EveryTestIsFinal implements TestCheck
 {
     /** @var iterable<string> $filePathNames */
-    private $filePathNames;
+    private iterable $filePathNames;
 
     /** @param iterable<string> $filePathNames */
     public function __construct(iterable $filePathNames)

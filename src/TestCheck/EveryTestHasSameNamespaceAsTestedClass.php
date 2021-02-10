@@ -20,7 +20,7 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
     private const PATTERN = '~\* @testedClass (?<targetClass>.+)\n~';
 
     /** @var iterable<string> $filePathNames */
-    private $filePathNames;
+    private iterable $filePathNames;
 
     /** @param iterable<string> $filePathNames */
     public function __construct(iterable $filePathNames)
@@ -69,7 +69,9 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                 );
             }
 
-            if (class_exists($targetClassMatches['targetClass'])) {
+            /** @psalm-var class-string $targetClass */
+            $targetClass = $targetClassMatches['targetClass'];
+            if (class_exists($targetClass)) {
                 continue;
             }
 

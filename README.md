@@ -1,8 +1,11 @@
 # Cdn77 TestUtils
 
-[![Build Status](https://github.com/cdn77/TestUtils/workflows/CI/badge.svg?branch=master)](https://github.com/cdn77/TestUtils/actions)
-[![Coverage Status](https://coveralls.io/repos/github/cdn77/TestUtils/badge.svg?branch=master)](https://coveralls.io/github/cdn77/TestUtils?branch=master)
-[![Downloads](https://poser.pugx.org/cdn77/test-utils/d/total.svg)](https://packagist.org/packages/cdn77/test-utils)
+[![GitHub Actions][GA Image]][GA Link]
+[![Shepherd Type][Shepherd Image]][Shepherd Link]
+[![Code Coverage][Coverage Image]][CodeCov Link]
+[![Downloads][Downloads Image]][Packagist Link]
+[![Packagist][Packagist Image]][Packagist Link]
+[![Infection MSI][Infection Image]][Infection Link]
 
 ## Contents
 
@@ -235,3 +238,25 @@ yield 'Every test is final' => [
     new EveryTestIsFinal($testFiles),
 ];
 ```
+
+[GA Image]: https://github.com/cdn77/TestUtils/workflows/CI/badge.svg
+
+[GA Link]: https://github.com/cdn77/TestUtils/actions?query=workflow%3A%22CI%22+branch%3Amaster
+
+[Shepherd Image]: https://shepherd.dev/github/cdn77/TestUtils/coverage.svg
+
+[Shepherd Link]: https://shepherd.dev/github/cdn77/TestUtils
+
+[Coverage Image]: https://codecov.io/gh/cdn77/TestUtils/branch/master/graph/badge.svg
+
+[CodeCov Link]: https://codecov.io/gh/cdn77/TestUtils/branch/master
+
+[Downloads Image]: https://poser.pugx.org/cdn77/test-utils/d/total.svg
+
+[Packagist Image]: https://poser.pugx.org/cdn77/test-utils/v/stable.svg
+
+[Packagist Link]: https://packagist.org/packages/simpod/test-utils
+
+[Infection Image]: https://badge.stryker-mutator.io/github.com/cdn77/TestUtils/master
+
+[Infection Link]: https://infection.github.io

@@ -5,9 +5,7 @@
 >
     <arg name="cache" value=".phpcs-cache" />
 
-    <rule ref="Cdn77">
-        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
-    </rule>
+    <rule ref="Cdn77" />
 
     <file>src/</file>
     <file>tests/</file>

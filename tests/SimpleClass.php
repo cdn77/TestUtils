@@ -6,14 +6,11 @@ namespace Cdn77\TestUtils\Tests;
 
 final class SimpleClass extends SimpleParentClass
 {
-    /** @var string */
-    private $property1;
+    private string $property1;
 
-    /** @var string */
-    private $property2;
+    private string $property2;
 
-    /** @var string */
-    private $propertyWithDefaultValue = 'default value';
+    private string $propertyWithDefaultValue = 'default value';
 
     public function __construct(string $property1, string $property2, string $property3)
     {

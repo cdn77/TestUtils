@@ -1,138 +1,74 @@
-name: CI
+name: "CI"
+
 on:
-    pull_request:
-    push:
-        branches:
-            - "master"
-    schedule:
-        - cron: "0 17 * * *"
+  pull_request:
+  push:
+#    branches:
+#      - "master"
+  schedule:
+    - cron: "42 3 * * *"
+
 jobs:
-    phpstan:
-        name: PHPStan
-        runs-on: ubuntu-20.04
-        strategy:
-            matrix:
-                php-version: [7.4]
-                dependencies: ["", --prefer-lowest]
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    coverage: none
-                    php-version: ${{ matrix.php-version }}
-                    tools: cs2pr
+  phpunit:
+    name: "PHPUnit"
+    runs-on: "ubuntu-20.04"
 
-            -   name: Cache dependencies installed with composer
-                uses: actions/cache@v1
-                with:
-                    path: ~/.composer/cache
-                    key: php-${{ matrix.php-version }}-dependencies-${{ matrix.dependencies }}
-                    restore-keys: php-${{ matrix.php-version }}
+    strategy:
+      matrix:
+        php-version:
+          - "7.4"
+          - "8.0"
+        dependencies:
+          - "highest"
+        include:
+          - dependencies: "lowest"
+            php-version: "7.4"
 
-            -   name: Install dependencies with composer
-                env:
-                    COMPOSER_ARGS: "--prefer-stable ${{ matrix.dependencies }}"
-                run: make
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 2
 
-            -   name: Run a static analysis with phpstan/phpstan
-                env:
-                    PHPSTAN_ARGS: --error-format=checkstyle
-                run: make -is static-analysis | cs2pr
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          coverage: "pcov"
+          ini-values: "zend.assertions=1"
 
-    coding-standards:
-        name: Coding Standards
-        runs-on: ubuntu-20.04
-        strategy:
-            matrix:
-                php-version: [7.4]
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    coverage: none
-                    php-version: ${{ matrix.php-version }}
-                    tools: cs2pr
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v1"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
 
-            -   name: Cache dependencies installed with composer
-                uses: actions/cache@v1
-                with:
-                    path: ~/.composer/cache
-                    key: php-${{ matrix.php-version }}
-                    restore-keys: php-${{ matrix.php-version }}
+      - name: "Run PHPUnit"
+        run: "vendor/bin/phpunit --coverage-clover=coverage.xml"
 
-            -   name: Install dependencies with composer
-                env:
-                    COMPOSER_ARGS: "--prefer-stable"
-                run: make
+      - name: "Upload coverage file"
+        uses: "actions/upload-artifact@v2"
+        with:
+          name: "phpunit-${{ matrix.deps }}-${{ matrix.php-version }}.coverage"
+          path: "coverage.xml"
 
-            -   name: Run squizlabs/php_codesniffer
-                env:
-                    PHPCS_ARGS: -q --no-colors --report=checkstyle
-                run: make -is cs | cs2pr
+  upload_coverage:
+    name: "Upload coverage to Codecov"
+    runs-on: "ubuntu-20.04"
+    needs:
+      - "phpunit"
 
-    tests:
-        name: Tests
-        runs-on: ubuntu-20.04
-        strategy:
-            matrix:
-                php-version: [7.4, 8.0]
-                dependencies: ["", --prefer-lowest]
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 2
 
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    coverage: none
-                    php-version: ${{ matrix.php-version }}
+      - name: "Download coverage files"
+        uses: "actions/download-artifact@v2"
+        with:
+          path: "reports"
 
-            -   name: Cache dependencies installed with composer
-                uses: actions/cache@v1
-                with:
-                    path: ~/.composer/cache
-                    key: php-${{ matrix.php-version }}-dependencies-${{ matrix.dependencies }}
-                    restore-keys: php-${{ matrix.php-version }}
-
-            -   name: Install dependencies with composer
-                env:
-                    COMPOSER_ARGS: "--prefer-stable ${{ matrix.dependencies }}"
-                run: make
-
-            -   name: Run tests
-                run: make test
-
-    coverage:
-        name: Tests Coverage
-        runs-on: ubuntu-20.04
-        strategy:
-            matrix:
-                php-version: [7.4]
-
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    coverage: pcov
-                    php-version: ${{ matrix.php-version }}
-
-            -   name: Cache dependencies installed with composer
-                uses: actions/cache@v1
-                with:
-                    path: ~/.composer/cache
-                    key: php-${{ matrix.php-version }}
-                    restore-keys: php-${{ matrix.php-version }}
-
-            -   name: Install dependencies with composer
-                env:
-                    COMPOSER_ARGS: "--prefer-stable"
-                run: make
-
-            -   name: Run tests coverage
-                env:
-                    PHPUNIT_ARGS: "--coverage-clover coverage/clover.xml"
-                run: make test
-
-            -   name: Report to Coveralls
-                env:
-                    COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    COVERALLS_RUN_LOCALLY: 1
-                run: vendor/bin/php-coveralls --coverage_clover coverage/clover.xml --json_path coverage/coveralls.json
+      - name: "Upload to Codecov"
+        uses: "codecov/codecov-action@v1"
+        with:
+          directory: reports

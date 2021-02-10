@@ -6,8 +6,7 @@ namespace Cdn77\TestUtils\Tests;
 
 class SimpleParentClass
 {
-    /** @var string */
-    private $parentProperty;
+    private string $parentProperty;
 
     public function __construct(string $parentProperty)
     {

@@ -5,21 +5,19 @@ declare(strict_types=1);
 namespace Cdn77\TestUtils\Tests;
 
 use Cdn77\TestUtils\Stub;
+use Error;
 use ReflectionException;
-use TypeError;
 
 final class StubTest extends BaseTestCase
 {
     public function testValueIsDefaultWhenNotSet() : void
     {
-        $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('null returned');
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('must not be accessed before initialization');
 
         $stub = Stub::create(SimpleClass::class);
 
         $stub->getProperty1();
-
-        self::assertSame('default value', $stub->getPropertyWithDefaultValue());
     }
 
     public function testPropertyIsSetBypassingConstructor() : void

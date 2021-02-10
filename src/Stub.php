@@ -16,16 +16,18 @@ final class Stub
 {
     /**
      * @param array<string, mixed> $properties
+     * @param class-string<T> $class
+     *
+     * @return T
      *
      * @template T of object
-     * @psalm-param class-string<T> $class
-     * @psalm-return T
      */
     public static function create(string $class, array $properties = []) : object
     {
         $reflection = new ReflectionClass($class);
 
         $stub = $reflection->newInstanceWithoutConstructor();
+        /** @var mixed $value */
         foreach ($properties as $property => $value) {
             $reflectionProperty = self::getClosestProperty($reflection, $property);
             if ($reflectionProperty === null) {
@@ -41,16 +43,18 @@ final class Stub
 
     /**
      * @param array<string, mixed> $newProperties
+     * @param T $stub
+     *
+     * @return T
      *
      * @template T of object
-     * @psalm-param T $stub
-     * @psalm-return T
      */
     public static function extend(object $stub, array $newProperties = []) : object
     {
         $class = get_class($stub);
         $reflection = new ReflectionClass($class);
 
+        /** @var array<string, mixed> $properties */
         $properties = [];
         foreach (self::getAllProperties($reflection) as $property) {
             $property->setAccessible(true);
@@ -58,15 +62,18 @@ final class Stub
                 continue;
             }
 
-            $properties[$property->getName()] = $property->getValue($stub);
+            /** @var mixed $value */
+            $value = $property->getValue($stub);
+            $properties[$property->getName()] = $value;
         }
 
         return self::create($class, array_merge($properties, $newProperties));
     }
 
     /**
+     * @param ReflectionClass<T> $class
+     *
      * @template T of object
-     * @psalm-param ReflectionClass<T> $class
      */
     private static function getClosestProperty(ReflectionClass $class, string $property) : ?ReflectionProperty
     {
@@ -76,7 +83,7 @@ final class Stub
 
         /**
          * @template T of object
-         * @psalm-var ReflectionClass<T>|false $parentClass
+         * @var ReflectionClass<T>|false $parentClass
          */
         $parentClass = $class->getParentClass();
         if ($parentClass === false) {
@@ -87,19 +94,26 @@ final class Stub
     }
 
     /**
-     * @param ReflectionClass<object> $reflection
+     * @param ReflectionClass<T> $reflection
      * @param ReflectionProperty[] $properties
      *
      * @return ReflectionProperty[]
+     *
+     * @template T of object
      */
     private static function getAllProperties(ReflectionClass $reflection, array $properties = []) : array
     {
         $properties = array_merge($reflection->getProperties(), $properties);
-        $parent = $reflection->getParentClass();
-        if ($parent === false) {
+
+        /**
+         * @psalm-template T of object
+         * @psalm-var ReflectionClass<T>|false $parentClass
+         */
+        $parentClass = $reflection->getParentClass();
+        if ($parentClass === false) {
             return $properties;
         }
 
-        return self::getAllProperties($parent, $properties);
+        return self::getAllProperties($parentClass, $properties);
     }
 }

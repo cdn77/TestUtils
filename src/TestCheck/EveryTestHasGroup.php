@@ -14,10 +14,10 @@ use function Safe\sprintf;
 final class EveryTestHasGroup implements TestCheck
 {
     /** @var list<string> */
-    private $allowedGroups;
+    private array $allowedGroups;
 
     /** @var iterable<string> */
-    private $filePathNames;
+    private iterable $filePathNames;
 
     /**
      * @param iterable<string> $filePathNames
