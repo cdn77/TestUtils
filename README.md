@@ -10,7 +10,6 @@
 - [Features](#features)
   - [Stub](#stub)
   - [Test Checks](#test-checks)
-  - [AdvancedAssert](#advanced-assert)
 
 ## Installation
 
@@ -236,7 +235,3 @@ yield 'Every test is final' => [
     new EveryTestIsFinal($testFiles),
 ];
 ```
-
-### AdvancedAssert
-
-TBD
