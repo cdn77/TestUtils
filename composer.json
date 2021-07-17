@@ -20,7 +20,7 @@
         "thecodingmachine/safe": "^1.0.2"
     },
     "require-dev": {
-        "cdn77/coding-standard": "^4.0",
+        "cdn77/coding-standard": "^5.0",
         "infection/infection": "^0.20.2",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.74",
