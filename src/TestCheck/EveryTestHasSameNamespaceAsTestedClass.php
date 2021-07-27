@@ -13,6 +13,7 @@ use function Safe\preg_match;
 use function Safe\sprintf;
 use function Safe\substr;
 use function str_replace;
+use function strlen;
 use function trait_exists;
 
 final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
@@ -22,10 +23,13 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
     /** @var iterable<string> $filePathNames */
     private iterable $filePathNames;
 
+    private string $testClassSuffix;
+
     /** @param iterable<string> $filePathNames */
-    public function __construct(iterable $filePathNames)
+    public function __construct(iterable $filePathNames, string $testClassSuffix = 'Test')
     {
         $this->filePathNames = $filePathNames;
+        $this->testClassSuffix = $testClassSuffix;
     }
 
     public function run(TestCase $testCaseContext) : void
@@ -49,7 +53,7 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
             }
 
             $className = $classReflection->getName();
-            $classNameWithoutSuffix = substr($className, 0, -4);
+            $classNameWithoutSuffix = substr($className, 0, strlen($this->testClassSuffix) * -1);
             $testedClassName = str_replace('\Tests\\', '\\', $classNameWithoutSuffix);
             if (class_exists($testedClassName) || trait_exists($testedClassName)) {
                 continue;
