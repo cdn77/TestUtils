@@ -12,20 +12,25 @@ use function class_exists;
 use function Safe\preg_match;
 use function Safe\sprintf;
 use function Safe\substr;
-use function str_replace;
+use function strlen;
+use function strpos;
+use function substr_replace;
 use function trait_exists;
 
 final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
 {
-    private const PATTERN = '~\* @testedClass (?<targetClass>.+)\n~';
+    private const PATTERN = '~\* @testedClass (?<targetClass>.+?)(?:\n| \*/)~';
 
     /** @var iterable<string> $filePathNames */
     private iterable $filePathNames;
 
+    private string $testsNamespaceSuffix;
+
     /** @param iterable<string> $filePathNames */
-    public function __construct(iterable $filePathNames)
+    public function __construct(iterable $filePathNames, string $testsNamespaceSuffix = 'Tests')
     {
         $this->filePathNames = $filePathNames;
+        $this->testsNamespaceSuffix = '\\' . $testsNamespaceSuffix . '\\';
     }
 
     public function run(TestCase $testCaseContext) : void
@@ -37,9 +42,7 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
 
             $docComment = $classReflection->getDocComment();
             if ($docComment === false) {
-                $testCaseContext::fail(
-                    sprintf('Test "%s" is missing phpdoc. See other tests for examples', $classReflection->getName())
-                );
+                $docComment = '';
             }
 
             preg_match(self::PATTERN, $docComment, $targetClassMatches);
@@ -50,7 +53,18 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
 
             $className = $classReflection->getName();
             $classNameWithoutSuffix = substr($className, 0, -4);
-            $testedClassName = str_replace('\Tests\\', '\\', $classNameWithoutSuffix);
+            $pos = strpos($classNameWithoutSuffix, $this->testsNamespaceSuffix);
+            if ($pos === false) {
+                $testedClassName = $classNameWithoutSuffix;
+            } else {
+                $testedClassName = substr_replace(
+                    $classNameWithoutSuffix,
+                    '\\',
+                    $pos,
+                    strlen($this->testsNamespaceSuffix)
+                );
+            }
+
             if (class_exists($testedClassName) || trait_exists($testedClassName)) {
                 continue;
             }
