@@ -16,7 +16,7 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
-        "cdn77/entity-fqn-extractor": "^0.1.0",
+        "cdn77/entity-fqn-extractor": "^0.1.0 || ^0.2.0",
         "phpunit/phpunit": "^9.2",
         "thecodingmachine/safe": "^1.0.2"
     },
