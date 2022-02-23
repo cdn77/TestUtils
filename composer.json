@@ -34,6 +34,12 @@
         "vimeo/psalm": "^4.4"
     },
     "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "infection/extension-installer": true,
+            "phpstan/extension-installer": true
+        },
         "sort-packages": true
     }
 }
