@@ -51,6 +51,8 @@ final class Stub
      */
     public static function extend(object $stub, array $newProperties = []) : object
     {
+        // phpstan has problem with analyzing this still
+        // phpcs:ignore SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaFunctionCall
         $class = get_class($stub);
         $reflection = new ReflectionClass($class);
 
