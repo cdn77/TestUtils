@@ -12,7 +12,7 @@ use PHPUnit\Framework\AssertionFailedError;
 final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
 {
     /** @dataProvider providerSuccess */
-    public function testSuccess(string $filePath) : void
+    public function testSuccess(string $filePath): void
     {
         $check = new EveryTestHasSameNamespaceAsTestedClass(
             [__DIR__ . '/Fixtures/EveryTestHasSameNamespaceAsTestedClass/tests/' . $filePath],
@@ -22,7 +22,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
     }
 
     /** @return Generator<array-key, list<string>> */
-    public function providerSuccess() : Generator
+    public function providerSuccess(): Generator
     {
         yield ['SameNamespaceTest.php'];
         yield ['SameNamespaceLinkedTest.php'];
@@ -30,7 +30,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
     }
 
     /** @dataProvider providerFail */
-    public function testFail(string $filePath, string $error) : void
+    public function testFail(string $filePath, string $error): void
     {
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage($error);
@@ -43,7 +43,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
     }
 
     /** @return Generator<array-key, list<string>> */
-    public function providerFail() : Generator
+    public function providerFail(): Generator
     {
         yield [
             'MissingAnnotationsTest.php',

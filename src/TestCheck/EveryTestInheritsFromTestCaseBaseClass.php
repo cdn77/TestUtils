@@ -12,23 +12,15 @@ use function Safe\sprintf;
 
 final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
 {
-    /** @var iterable<string> $filePathNames */
-    private iterable $filePathNames;
-
-    /** @var class-string<TestCase> */
-    private string $testCaseBaseClass;
-
     /**
      * @param iterable<string> $filePathNames
      * @param class-string<TestCase> $testCaseBaseClass
      */
-    public function __construct(iterable $filePathNames, string $testCaseBaseClass)
+    public function __construct(private iterable $filePathNames, private string $testCaseBaseClass)
     {
-        $this->filePathNames = $filePathNames;
-        $this->testCaseBaseClass = $testCaseBaseClass;
     }
 
-    public function run(TestCase $testCaseContext) : void
+    public function run(TestCase $testCaseContext): void
     {
         $testCaseContext::assertTrue(true);
 
@@ -62,8 +54,8 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
     private function assertParentClass(
         TestCase $testCaseContext,
         ReflectionClass $classReflection,
-        ReflectionClass $parentClassReflection
-    ) : void {
+        ReflectionClass $parentClassReflection,
+    ): void {
         if ($parentClassReflection->getName() === $this->testCaseBaseClass) {
             return;
         }

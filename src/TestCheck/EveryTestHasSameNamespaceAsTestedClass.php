@@ -21,19 +21,15 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
 {
     private const PATTERN = '~\* @testedClass (?<targetClass>.+?)(?:\n| \*/)~';
 
-    /** @var iterable<string> $filePathNames */
-    private iterable $filePathNames;
-
     private string $testsNamespaceSuffix;
 
     /** @param iterable<string> $filePathNames */
-    public function __construct(iterable $filePathNames, string $testsNamespaceSuffix = 'Tests')
+    public function __construct(private iterable $filePathNames, string $testsNamespaceSuffix = 'Tests')
     {
-        $this->filePathNames = $filePathNames;
         $this->testsNamespaceSuffix = '\\' . $testsNamespaceSuffix . '\\';
     }
 
-    public function run(TestCase $testCaseContext) : void
+    public function run(TestCase $testCaseContext): void
     {
         $testCaseContext::assertTrue(true);
 

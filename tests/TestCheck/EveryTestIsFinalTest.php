@@ -10,18 +10,18 @@ use PHPUnit\Framework\ExpectationFailedException;
 
 final class EveryTestIsFinalTest extends BaseTestCase
 {
-    public function testSuccess() : void
+    public function testSuccess(): void
     {
         $check = new EveryTestIsFinal([__DIR__ . '/Fixtures/FinalClass.php']);
         $check->run($this);
     }
 
-    public function testFail() : void
+    public function testFail(): void
     {
         try {
             $check = new EveryTestIsFinal([__DIR__ . '/Fixtures/NotFinalClass.php']);
             $check->run($this);
-        } catch (ExpectationFailedException $exception) {
+        } catch (ExpectationFailedException) {
             return;
         }
 

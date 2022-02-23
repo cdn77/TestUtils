@@ -8,5 +8,5 @@ use PHPUnit\Framework\TestCase;
 
 interface TestCheck
 {
-    public function run(TestCase $testCaseContext) : void;
+    public function run(TestCase $testCaseContext): void;
 }

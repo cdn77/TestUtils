@@ -10,7 +10,7 @@ use ReflectionException;
 
 final class StubTest extends BaseTestCase
 {
-    public function testValueIsDefaultWhenNotSet() : void
+    public function testValueIsDefaultWhenNotSet(): void
     {
         $this->expectException(Error::class);
         $this->expectExceptionMessage('must not be accessed before initialization');
@@ -20,21 +20,21 @@ final class StubTest extends BaseTestCase
         $stub->getProperty1();
     }
 
-    public function testPropertyIsSetBypassingConstructor() : void
+    public function testPropertyIsSetBypassingConstructor(): void
     {
         $stub = Stub::create(SimpleClass::class, ['property1' => 'value']);
 
         self::assertSame('value', $stub->getProperty1());
     }
 
-    public function testParentPropertyIsSetBypassingConstructor() : void
+    public function testParentPropertyIsSetBypassingConstructor(): void
     {
         $stub = Stub::create(SimpleClass::class, ['parentProperty' => 'value']);
 
         self::assertSame('value', $stub->getParentProperty());
     }
 
-    public function testSettingNonexistentPropertyThrowsException() : void
+    public function testSettingNonexistentPropertyThrowsException(): void
     {
         $this->expectException(ReflectionException::class);
         $this->expectExceptionMessage('Property "nonexistentProperty" not found');
@@ -42,7 +42,7 @@ final class StubTest extends BaseTestCase
         Stub::create(SimpleClass::class, ['nonexistentProperty' => 'value']);
     }
 
-    public function testExtend() : void
+    public function testExtend(): void
     {
         $stub = Stub::create(SimpleClass::class, ['property1' => 'value']);
 

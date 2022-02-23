@@ -12,7 +12,7 @@ use PHPUnit\Framework\AssertionFailedError;
 final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
 {
     /** @dataProvider providerSuccess */
-    public function testSuccess(string $filePath) : void
+    public function testSuccess(string $filePath): void
     {
         $check = new EveryTestInheritsFromTestCaseBaseClass(
             [__DIR__ . '/Fixtures/' . $filePath],
@@ -22,7 +22,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     }
 
     /** @return Generator<list<string>> */
-    public function providerSuccess() : Generator
+    public function providerSuccess(): Generator
     {
         yield ['ExtendsBase.php'];
         yield ['ExtendsBaseUsingParent.php'];
@@ -30,7 +30,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     }
 
     /** @dataProvider providerFail */
-    public function testFail(string $filePath) : void
+    public function testFail(string $filePath): void
     {
         try {
             $check = new EveryTestInheritsFromTestCaseBaseClass(
@@ -38,7 +38,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
                 BaseTestCase::class
             );
             $check->run($this);
-        } catch (AssertionFailedError $exception) {
+        } catch (AssertionFailedError) {
             return;
         }
 
@@ -46,7 +46,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     }
 
     /** @return Generator<list<string>> */
-    public function providerFail() : Generator
+    public function providerFail(): Generator
     {
         yield ['DoesNotExtendAnything.php'];
         yield ['DoesNotExtendBase.php'];

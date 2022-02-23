@@ -13,23 +13,15 @@ use function Safe\sprintf;
 
 final class EveryTestHasGroup implements TestCheck
 {
-    /** @var list<string> */
-    private array $allowedGroups;
-
-    /** @var iterable<string> */
-    private iterable $filePathNames;
-
     /**
      * @param iterable<string> $filePathNames
      * @param list<string> $allowedGroups
      */
-    public function __construct(iterable $filePathNames, array $allowedGroups)
+    public function __construct(private iterable $filePathNames, private array $allowedGroups)
     {
-        $this->allowedGroups = $allowedGroups;
-        $this->filePathNames = $filePathNames;
     }
 
-    public function run(TestCase $testCaseContext) : void
+    public function run(TestCase $testCaseContext): void
     {
         foreach ($this->filePathNames as $filePathName) {
             $classReflection = new ReflectionClass(ClassExtractor::get($filePathName));
@@ -39,7 +31,7 @@ final class EveryTestHasGroup implements TestCheck
     }
 
     /** @param ReflectionClass<object> $reflectionClass */
-    private function validateDocComment(TestCase $testCaseContext, ReflectionClass $reflectionClass) : void
+    private function validateDocComment(TestCase $testCaseContext, ReflectionClass $reflectionClass): void
     {
         $docComment = $reflectionClass->getDocComment();
         if ($docComment === false) {

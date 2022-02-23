@@ -22,7 +22,7 @@ final class Stub
      *
      * @template T of object
      */
-    public static function create(string $class, array $properties = []) : object
+    public static function create(string $class, array $properties = []): object
     {
         $reflection = new ReflectionClass($class);
 
@@ -49,7 +49,7 @@ final class Stub
      *
      * @template T of object
      */
-    public static function extend(object $stub, array $newProperties = []) : object
+    public static function extend(object $stub, array $newProperties = []): object
     {
         // phpstan has problem with analyzing this still
         // phpcs:ignore SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaFunctionCall
@@ -77,7 +77,7 @@ final class Stub
      *
      * @template T of object
      */
-    private static function getClosestProperty(ReflectionClass $class, string $property) : ?ReflectionProperty
+    private static function getClosestProperty(ReflectionClass $class, string $property): ReflectionProperty|null
     {
         if ($class->hasProperty($property)) {
             return $class->getProperty($property);
@@ -103,7 +103,7 @@ final class Stub
      *
      * @template T of object
      */
-    private static function getAllProperties(ReflectionClass $reflection, array $properties = []) : array
+    private static function getAllProperties(ReflectionClass $reflection, array $properties = []): array
     {
         $properties = array_merge($reflection->getProperties(), $properties);
 
