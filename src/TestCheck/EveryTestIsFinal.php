@@ -12,16 +12,12 @@ use function Safe\sprintf;
 
 final class EveryTestIsFinal implements TestCheck
 {
-    /** @var iterable<string> $filePathNames */
-    private iterable $filePathNames;
-
     /** @param iterable<string> $filePathNames */
-    public function __construct(iterable $filePathNames)
+    public function __construct(private iterable $filePathNames)
     {
-        $this->filePathNames = $filePathNames;
     }
 
-    public function run(TestCase $testCaseContext) : void
+    public function run(TestCase $testCaseContext): void
     {
         foreach ($this->filePathNames as $filePathName) {
             $classReflection = new ReflectionClass(ClassExtractor::get($filePathName));

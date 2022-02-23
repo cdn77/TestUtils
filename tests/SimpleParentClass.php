@@ -6,14 +6,11 @@ namespace Cdn77\TestUtils\Tests;
 
 class SimpleParentClass
 {
-    private string $parentProperty;
-
-    public function __construct(string $parentProperty)
+    public function __construct(private string $parentProperty)
     {
-        $this->parentProperty = $parentProperty;
     }
 
-    public function getParentProperty() : string
+    public function getParentProperty(): string
     {
         return $this->parentProperty;
     }
