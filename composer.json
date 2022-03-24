@@ -18,7 +18,7 @@
         "php": "^8.0",
         "cdn77/entity-fqn-extractor": "^0.1.0 || ^0.2.0",
         "phpunit/phpunit": "^9.2",
-        "thecodingmachine/safe": "^1.0.2"
+        "thecodingmachine/safe": "^1 || ^2"
     },
     "require-dev": {
         "cdn77/coding-standard": "^6.0",
