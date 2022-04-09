@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.0",
         "cdn77/entity-fqn-extractor": "^0.2.0",
-        "phpunit/phpunit": "^9.2",
+        "phpunit/phpunit": "^9.5",
         "thecodingmachine/safe": "^1 || ^2"
     },
     "require-dev": {
@@ -27,7 +27,7 @@
         "phpstan/phpstan": "^1",
         "phpstan/phpstan-phpunit": "^1",
         "phpstan/phpstan-strict-rules": "^1",
-        "phpunit/phpunit": "^9.2",
+        "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.1",
         "roave/infection-static-analysis-plugin": "^1.7",
         "thecodingmachine/phpstan-safe-rule": "^1.0",
