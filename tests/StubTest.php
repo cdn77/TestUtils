@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\TestUtils\Tests;
 
 use Cdn77\TestUtils\Stub;
+use Cdn77\TestUtils\Tests\Fixture\ClassWithReadonlyProperty;
 use Error;
 use ReflectionException;
 
@@ -50,5 +51,29 @@ final class StubTest extends BaseTestCase
 
         self::assertSame('value', $stub->getProperty1());
         self::assertSame('value2', $stub->getProperty2());
+    }
+
+    public function testReadonlyPropertyIsSetBypassingConstructor(): void
+    {
+        $stub = Stub::create(ClassWithReadonlyProperty::class, ['readonlyProperty' => 'value']);
+
+        self::assertSame('value', $stub->readonlyProperty());
+    }
+
+    public function testPrivateReadonlyPropertyIsSetBypassingConstructor(): void
+    {
+        $stub = Stub::create(ClassWithReadonlyProperty::class, ['parentReadonlyProperty' => 'value']);
+
+        self::assertSame('value', $stub->parentReadonlyProperty());
+    }
+
+    /** PHP does not allow setting protected or public readonly properties from different scopes */
+    public function testPublicReadonlyPropertyCannotBeSet(): void
+    {
+        $this->expectException(Error::class);
+        $this->expectErrorMessage('Cannot initialize readonly property');
+        $this->expectErrorMessage('from scope');
+
+        Stub::create(ClassWithReadonlyProperty::class, ['parentPublicReadonlyProperty' => 'value']);
     }
 }
