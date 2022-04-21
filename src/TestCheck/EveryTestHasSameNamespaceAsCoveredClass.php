@@ -9,7 +9,9 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function class_exists;
+use function count;
 use function Safe\preg_match;
+use function Safe\preg_match_all;
 use function Safe\sprintf;
 use function Safe\substr;
 use function strlen;
@@ -17,10 +19,10 @@ use function strpos;
 use function substr_replace;
 use function trait_exists;
 
-/** @deprecated Use {@see EveryTestHasSameNamespaceAsCoveredClass} */
-final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
+final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
 {
-    private const PATTERN = '~\* @testedClass (?<targetClass>.+?)(?:\n| \*/)~';
+    private const PATTERN_COVERS = '~\* @covers(DefaultClass)? +(?<coveredClass>.+?)(?:\n| \*/)~';
+    private const PATTERN_COVERS_NOTHING = '~\* @coversNothing~';
 
     private string $testsNamespaceSuffix;
 
@@ -42,9 +44,17 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                 $docComment = '';
             }
 
-            preg_match(self::PATTERN, $docComment, $targetClassMatches);
+            $matchesCovers = preg_match_all(self::PATTERN_COVERS, $docComment, $coversMatches) > 0;
+            $matchesCoversNothing = preg_match(self::PATTERN_COVERS_NOTHING, $docComment) === 1;
 
-            if ($targetClassMatches !== [] && $targetClassMatches['targetClass'] === 'none') {
+            if ($matchesCovers && $matchesCoversNothing) {
+                $testCaseContext::fail(sprintf(
+                    'Test file "%s" contains both @covers and @coversNothing annotations.',
+                    $file
+                ));
+            }
+
+            if ($matchesCoversNothing) {
                 continue;
             }
 
@@ -52,9 +62,9 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
             $classNameWithoutSuffix = substr($className, 0, -4);
             $pos = strpos($classNameWithoutSuffix, $this->testsNamespaceSuffix);
             if ($pos === false) {
-                $testedClassName = $classNameWithoutSuffix;
+                $coveredClassName = $classNameWithoutSuffix;
             } else {
-                $testedClassName = substr_replace(
+                $coveredClassName = substr_replace(
                     $classNameWithoutSuffix,
                     '\\',
                     $pos,
@@ -62,7 +72,7 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                 );
             }
 
-            if (class_exists($testedClassName) || trait_exists($testedClassName)) {
+            if (class_exists($coveredClassName) || trait_exists($coveredClassName)) {
                 continue;
             }
 
@@ -70,19 +80,24 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                 continue;
             }
 
-            if ($targetClassMatches === []) {
+            if ($coversMatches[0] === []) {
                 $testCaseContext::fail(
                     sprintf(
                         'Test "%s" is in the wrong namespace, ' .
-                        'has name different from tested class or is missing @testedClass annotation',
+                        'has name different from tested class or is missing @covers annotation',
                         $classReflection->getName()
                     )
                 );
             }
 
-            /** @psalm-var class-string $targetClass */
-            $targetClass = $targetClassMatches['targetClass'];
-            if (class_exists($targetClass)) {
+            /** @psalm-var list<class-string> $coveredClass */
+            $coveredClasses = $coversMatches['coveredClass'];
+            if (count($coveredClasses) > 1) {
+                continue;
+            }
+
+            $coveredClass = $coveredClasses[0];
+            if (class_exists($coveredClass)) {
                 continue;
             }
 
@@ -90,7 +105,7 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                 sprintf(
                     'Test %s is pointing to an non-existing class "%s"',
                     $classReflection->getName(),
-                    $targetClassMatches['targetClass']
+                    $coveredClass
                 )
             );
         }
