@@ -79,7 +79,7 @@ self::assertSame('Hello world!', $myEntity->salute());
 
 Test Checks are used to assert that tests comply with your suite's standards (are final, extend correct TestCaseBase etc.)
 
-To run them, eg. create a test case like in the following example: 
+To run them, e.g. create a test case like in the following example: 
 
 ```php
 <?php
@@ -137,6 +137,57 @@ Configured in test provider as
 ```php
 yield 'Every test has group' => [
     new EveryTestHasGroup($testFiles),
+];
+```
+
+### Every test has same namespace as covered class
+
+Asserts that all test share same namespace with class they're testing.  
+Consider src namespace `Ns` and test namespace `Ns/Tests` then for test `Ns/Tests/UnitTest` must exist class `Ns/Unit`. 
+
+You can use `@covers` or `@coversDefaultClass` annotations to link test with tested class.  
+Use `@coversNothing` annotation to skip this check.
+
+Don't forget to enable `"forceCoversAnnotation="true"` in phpunit config file.
+
+```php
+namespace Ns;
+
+final class Unit {} 
+```
+
+:x:
+```php
+namespace Ns\Tests;
+
+final class NonexistentUnitTest extends TestCase {}
+```
+
+```php
+namespace Ns\Tests\Sub;
+
+final class UnitTest extends TestCase {}
+```
+
+:heavy_check_mark:
+```php
+namespace Ns\Tests;
+
+final class UnitTest extends TestCase {}
+```
+
+```php
+namespace Ns\Tests\Sub;
+
+/** @covers \Ns\Unit */
+final class UnitTest extends TestCase {}
+```
+
+Configured in test provider as
+
+```php
+yield 'Every test has same namespace as tested class' => [
+    new EveryTestHasSameNamespaceAsCoveredClass($testFiles),
 ];
 ```
 
