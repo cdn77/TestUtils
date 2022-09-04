@@ -1,6 +1,10 @@
 {
     "name": "cdn77/test-utils",
     "description": "Cdn77 Test Utils for PHP",
+    "keywords": [
+        "testing",
+        "cdn77"
+    ],
     "type": "library",
     "license": "MIT",
     "autoload": {
