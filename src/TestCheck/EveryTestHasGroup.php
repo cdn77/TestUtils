@@ -40,7 +40,7 @@ final class EveryTestHasGroup implements TestCheck
 
         if (preg_match('~\* @group +(?<group>\w+)(\n| \*/)~', $docComment, $matches) !== 1) {
             $testCaseContext::fail(
-                sprintf('Test "%s" is missing @group annotation', $reflectionClass->getName())
+                sprintf('Test "%s" is missing @group annotation', $reflectionClass->getName()),
             );
         }
 
@@ -50,8 +50,8 @@ final class EveryTestHasGroup implements TestCheck
             sprintf(
                 'Test "%s" has invalid @group annotation "%s"',
                 $reflectionClass->getName(),
-                $matches['group']
-            )
+                $matches['group'],
+            ),
         );
     }
 }

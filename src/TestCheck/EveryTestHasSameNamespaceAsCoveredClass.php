@@ -21,8 +21,8 @@ use function trait_exists;
 
 final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
 {
-    private const PATTERN_COVERS = '~\* @covers(DefaultClass)? +(?<coveredClass>.+?)(?:\n| \*/)~';
-    private const PATTERN_COVERS_NOTHING = '~\* @coversNothing~';
+    private const PatternCovers = '~\* @covers(DefaultClass)? +(?<coveredClass>.+?)(?:\n| \*/)~';
+    private const PatternCoversNothing = '~\* @coversNothing~';
 
     private string $testsNamespaceSuffix;
 
@@ -44,13 +44,13 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
                 $docComment = '';
             }
 
-            $matchesCovers = preg_match_all(self::PATTERN_COVERS, $docComment, $coversMatches) > 0;
-            $matchesCoversNothing = preg_match(self::PATTERN_COVERS_NOTHING, $docComment) === 1;
+            $matchesCovers = preg_match_all(self::PatternCovers, $docComment, $coversMatches) > 0;
+            $matchesCoversNothing = preg_match(self::PatternCoversNothing, $docComment) === 1;
 
             if ($matchesCovers && $matchesCoversNothing) {
                 $testCaseContext::fail(sprintf(
                     'Test file "%s" contains both @covers and @coversNothing annotations.',
-                    $file
+                    $file,
                 ));
             }
 
@@ -68,7 +68,7 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
                     $classNameWithoutSuffix,
                     '\\',
                     $pos,
-                    strlen($this->testsNamespaceSuffix)
+                    strlen($this->testsNamespaceSuffix),
                 );
             }
 
@@ -85,8 +85,8 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
                     sprintf(
                         'Test "%s" is in the wrong namespace, ' .
                         'has name different from tested class or is missing @covers annotation',
-                        $classReflection->getName()
-                    )
+                        $classReflection->getName(),
+                    ),
                 );
             }
 
@@ -105,8 +105,8 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
                 sprintf(
                     'Test %s is pointing to an non-existing class "%s"',
                     $classReflection->getName(),
-                    $coveredClass
-                )
+                    $coveredClass,
+                ),
             );
         }
     }

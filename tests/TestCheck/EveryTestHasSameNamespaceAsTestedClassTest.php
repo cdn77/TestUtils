@@ -16,7 +16,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
     {
         $check = new EveryTestHasSameNamespaceAsTestedClass(
             [__DIR__ . '/Fixtures/EveryTestHasSameNamespaceAsTestedClass/tests/' . $filePath],
-            'Tests'
+            'Tests',
         );
         $check->run($this);
     }
@@ -37,7 +37,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
 
         $check = new EveryTestHasSameNamespaceAsTestedClass(
             [__DIR__ . '/Fixtures/EveryTestHasSameNamespaceAsTestedClass/tests/' . $filePath],
-            'Tests'
+            'Tests',
         );
         $check->run($this);
     }
