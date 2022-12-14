@@ -23,7 +23,7 @@ final class EveryTestIsFinal implements TestCheck
             $classReflection = new ReflectionClass(ClassExtractor::get($filePathName));
             $testCaseContext::assertTrue(
                 $classReflection->isFinal(),
-                sprintf('Test %s is missing "final" class keyword', $classReflection->getName())
+                sprintf('Test %s is missing "final" class keyword', $classReflection->getName()),
             );
         }
     }

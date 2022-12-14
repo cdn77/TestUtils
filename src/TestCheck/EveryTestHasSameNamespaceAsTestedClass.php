@@ -58,7 +58,7 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                     $classNameWithoutSuffix,
                     '\\',
                     $pos,
-                    strlen($this->testsNamespaceSuffix)
+                    strlen($this->testsNamespaceSuffix),
                 );
             }
 
@@ -75,8 +75,8 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                     sprintf(
                         'Test "%s" is in the wrong namespace, ' .
                         'has name different from tested class or is missing @testedClass annotation',
-                        $classReflection->getName()
-                    )
+                        $classReflection->getName(),
+                    ),
                 );
             }
 
@@ -90,8 +90,8 @@ final class EveryTestHasSameNamespaceAsTestedClass implements TestCheck
                 sprintf(
                     'Test %s is pointing to an non-existing class "%s"',
                     $classReflection->getName(),
-                    $targetClassMatches['targetClass']
-                )
+                    $targetClassMatches['targetClass'],
+                ),
             );
         }
     }

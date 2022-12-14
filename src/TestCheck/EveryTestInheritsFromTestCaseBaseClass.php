@@ -34,8 +34,8 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
                     sprintf(
                         'Test "%s" does not extend any class, use "%s" as the base class',
                         $classReflection->getName(),
-                        $this->testCaseBaseClass
-                    )
+                        $this->testCaseBaseClass,
+                    ),
                 );
             }
 
@@ -67,8 +67,8 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
                 sprintf(
                     'Test "%s" is extending different class than expected, use "%s" as the base class',
                     $classReflection->getName(),
-                    $this->testCaseBaseClass
-                )
+                    $this->testCaseBaseClass,
+                ),
             );
         }
 

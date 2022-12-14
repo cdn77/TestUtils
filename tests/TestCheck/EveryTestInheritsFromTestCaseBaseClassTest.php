@@ -16,7 +16,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     {
         $check = new EveryTestInheritsFromTestCaseBaseClass(
             [__DIR__ . '/Fixtures/' . $filePath],
-            BaseTestCase::class
+            BaseTestCase::class,
         );
         $check->run($this);
     }
@@ -35,7 +35,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
         try {
             $check = new EveryTestInheritsFromTestCaseBaseClass(
                 [__DIR__ . '/Fixtures/' . $filePath],
-                BaseTestCase::class
+                BaseTestCase::class,
             );
             $check->run($this);
         } catch (AssertionFailedError) {
