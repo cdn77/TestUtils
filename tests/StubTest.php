@@ -70,10 +70,15 @@ final class StubTest extends BaseTestCase
     /** PHP does not allow setting protected or public readonly properties from different scopes */
     public function testPublicReadonlyPropertyCannotBeSet(): void
     {
-        $this->expectException(Error::class);
-        $this->expectErrorMessage('Cannot initialize readonly property');
-        $this->expectErrorMessage('from scope');
+        try {
+            Stub::create(ClassWithReadonlyProperty::class, ['parentPublicReadonlyProperty' => 'value']);
+        } catch (Error $e) {
+            self::assertStringContainsString('Cannot initialize readonly property', $e->getMessage());
+            self::assertStringContainsString('from scope', $e->getMessage());
 
-        Stub::create(ClassWithReadonlyProperty::class, ['parentPublicReadonlyProperty' => 'value']);
+            return;
+        }
+
+        self::fail('Expected error was not thrown');
     }
 }
