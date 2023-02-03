@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.1",
         "cdn77/entity-fqn-extractor": "^0.2.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.5 || ^10",
         "thecodingmachine/safe": "^2"
     },
     "require-dev": {
