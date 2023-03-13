@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function class_exists;
-use function count;
 use function Safe\preg_match;
 use function Safe\preg_match_all;
 use function Safe\sprintf;
@@ -80,32 +79,15 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
                 continue;
             }
 
-            if ($coversMatches[0] === []) {
-                $testCaseContext::fail(
-                    sprintf(
-                        'Test "%s" is in the wrong namespace, ' .
-                        'has name different from tested class or is missing @covers annotation',
-                        $classReflection->getName(),
-                    ),
-                );
-            }
-
-            /** @psalm-var list<class-string> $coveredClass */
-            $coveredClasses = $coversMatches['coveredClass'];
-            if (count($coveredClasses) > 1) {
-                continue;
-            }
-
-            $coveredClass = $coveredClasses[0];
-            if (class_exists($coveredClass)) {
+            if ($coversMatches[0] !== []) {
                 continue;
             }
 
             $testCaseContext::fail(
                 sprintf(
-                    'Test %s is pointing to an non-existing class "%s"',
+                    'Test "%s" is in the wrong namespace, ' .
+                    'has name different from tested class or is missing @covers annotation',
                     $classReflection->getName(),
-                    $coveredClass,
                 ),
             );
         }
