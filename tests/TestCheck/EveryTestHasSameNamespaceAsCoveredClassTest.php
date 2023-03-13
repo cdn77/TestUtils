@@ -22,7 +22,7 @@ final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
     }
 
     /** @return Generator<array-key, list<string>> */
-    public function providerSuccess(): Generator
+    public static function providerSuccess(): Generator
     {
               $files = [
                   'IgnoreMultipleCoversTest.php',
@@ -52,7 +52,7 @@ final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
     }
 
     /** @return Generator<array-key, list<string>> */
-    public function providerFail(): Generator
+    public static function providerFail(): Generator
     {
         yield [
             'CoversNonexistentClassTest.php',

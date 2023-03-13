@@ -22,7 +22,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
     }
 
     /** @return Generator<array-key, list<string>> */
-    public function providerSuccess(): Generator
+    public static function providerSuccess(): Generator
     {
         yield ['SameNamespaceTest.php'];
         yield ['SameNamespaceLinkedTest.php'];
@@ -43,7 +43,7 @@ final class EveryTestHasSameNamespaceAsTestedClassTest extends BaseTestCase
     }
 
     /** @return Generator<array-key, list<string>> */
-    public function providerFail(): Generator
+    public static function providerFail(): Generator
     {
         yield [
             'MissingAnnotationsTest.php',
