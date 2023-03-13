@@ -56,7 +56,7 @@ final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
     {
         yield [
             'CoversAndCoversNothingTest.php',
-            'contains both @covers and @coversNothing annotations',
+            'Specifying CoversClass and CoversNothing attributes at the same time',
         ];
 
         yield [

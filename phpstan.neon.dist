@@ -5,3 +5,6 @@ parameters:
         - %currentWorkingDirectory%/tests
     ignoreErrors:
         - "~Call to static method PHPUnit\\\\Framework\\\\Assert::assertTrue\\(\\) with true will always evaluate to true~"
+
+includes:
+    - phpstan-baseline.neon
