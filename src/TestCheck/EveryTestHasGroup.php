@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function Safe\preg_match;
-use function Safe\sprintf;
+use function sprintf;
 
 final class EveryTestHasGroup implements TestCheck
 {

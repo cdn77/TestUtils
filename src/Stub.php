@@ -10,7 +10,7 @@ use ReflectionProperty;
 
 use function array_merge;
 use function get_class;
-use function Safe\sprintf;
+use function sprintf;
 
 final class Stub
 {
