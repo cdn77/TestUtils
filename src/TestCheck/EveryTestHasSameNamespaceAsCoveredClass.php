@@ -53,7 +53,7 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
                 ));
             }
 
-            if ($matchesCoversNothing) {
+            if ($matchesCoversNothing || $matchesCovers) {
                 continue;
             }
 
@@ -72,14 +72,6 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
             }
 
             if (class_exists($coveredClassName) || trait_exists($coveredClassName)) {
-                continue;
-            }
-
-            if (class_exists($classNameWithoutSuffix)) {
-                continue;
-            }
-
-            if ($coversMatches[0] !== []) {
                 continue;
             }
 
