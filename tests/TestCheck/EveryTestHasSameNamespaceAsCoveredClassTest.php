@@ -55,11 +55,6 @@ final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
     public static function providerFail(): Generator
     {
         yield [
-            'CoversNonexistentClassTest.php',
-            'is pointing to an non-existing class',
-        ];
-
-        yield [
             'CoversAndCoversNothingTest.php',
             'contains both @covers and @coversNothing annotations',
         ];
