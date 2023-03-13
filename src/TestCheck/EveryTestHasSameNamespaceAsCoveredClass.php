@@ -11,10 +11,10 @@ use ReflectionClass;
 use function class_exists;
 use function Safe\preg_match;
 use function Safe\preg_match_all;
-use function Safe\sprintf;
-use function Safe\substr;
+use function sprintf;
 use function strlen;
 use function strpos;
+use function substr;
 use function substr_replace;
 use function trait_exists;
 

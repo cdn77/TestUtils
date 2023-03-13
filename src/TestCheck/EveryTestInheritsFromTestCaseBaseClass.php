@@ -8,7 +8,7 @@ use Cdn77\EntityFqnExtractor\ClassExtractor;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-use function Safe\sprintf;
+use function sprintf;
 
 final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
 {
