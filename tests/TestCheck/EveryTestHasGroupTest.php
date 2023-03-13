@@ -11,17 +11,47 @@ use PHPUnit\Framework\AssertionFailedError;
 
 final class EveryTestHasGroupTest extends BaseTestCase
 {
-    public function testSuccess(): void
-    {
-        $check = new EveryTestHasGroup([__DIR__ . '/Fixtures/WithGroup.php'], ['unit']);
+    /**
+     * @param non-empty-list<string>|null $requiredGroups
+     * @param list<string>|null $supportedGroups
+     *
+     * @dataProvider providerSuccess
+     */
+    public function testSuccess(
+        string $filePath,
+        array|null $requiredGroups,
+        array|null $supportedGroups,
+    ): void {
+        $check = new EveryTestHasGroup([__DIR__ . '/Fixtures/' . $filePath], $requiredGroups, $supportedGroups);
         $check->run($this);
     }
 
-    /** @dataProvider providerFail */
-    public function testFail(string $filePath): void
+    /** @return Generator<string, array{string, non-empty-list<string>|null, list<string>|null}> */
+    public static function providerSuccess(): Generator
     {
+        yield 'required, any supported' => ['WithGroups.php', ['a'], null];
+        yield 'required, supported' => ['WithGroups.php', ['a'], ['b']];
+        yield 'no required, supported' => ['WithGroups.php', null, ['a', 'b']];
+        yield 'no required, any supported' => ['WithGroups.php', null, null];
+        yield 'required, any supported - A' => ['WithGroupsAnnotations.php', ['a'], null];
+        yield 'required, supported - A' => ['WithGroupsAnnotations.php', ['a'], ['b']];
+        yield 'no required, supported - A' => ['WithGroupsAnnotations.php', null, ['a', 'b']];
+        yield 'no required, any supported - A' => ['WithGroupsAnnotations.php', null, null];
+    }
+
+    /**
+     * @param non-empty-list<string>|null $requiredGroups
+     * @param list<string>|null $supportedGroups
+     *
+     * @dataProvider providerFail
+     */
+    public function testFail(
+        string $filePath,
+        array|null $requiredGroups,
+        array|null $supportedGroups,
+    ): void {
         try {
-            $check = new EveryTestHasGroup([__DIR__ . '/Fixtures/' . $filePath], ['unit']);
+            $check = new EveryTestHasGroup([__DIR__ . '/Fixtures/' . $filePath], $requiredGroups, $supportedGroups);
             $check->run($this);
         } catch (AssertionFailedError) {
             return;
@@ -30,10 +60,11 @@ final class EveryTestHasGroupTest extends BaseTestCase
         self::fail('Unexpected check outcome');
     }
 
-    /** @return Generator<list<string>> */
+    /** @return Generator<string, array{string, non-empty-list<string>|null, list<string>|null}> */
     public static function providerFail(): Generator
     {
-        yield ['WithoutGroup.php'];
-        yield ['WithUnlistedGroup.php'];
+        yield 'has unsupported group, required' => ['WithGroups.php', null, []];
+        yield 'has no group, required' => ['WithoutGroup.php', ['a'], null];
+        yield 'has unsupported group, required - A' => ['WithGroupsAnnotations.php', null, []];
     }
 }

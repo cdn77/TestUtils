@@ -6,7 +6,10 @@ namespace Cdn77\TestUtils\Tests\TestCheck\Fixtures;
 
 use PHPUnit\Framework\Attributes\Group;
 
-#[Group('unit')]
-final class WithGroup
+/**
+ * @group a
+ * @group b
+ */
+final class WithGroupsAnnotations
 {
 }
