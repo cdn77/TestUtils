@@ -86,11 +86,11 @@ To run them, e.g. create a test case like in the following example:
 
 use Cdn77\TestUtils\TestCheck\TestCheck;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Group;
 
-/**
- * @group       integration
- * @coversNothing
- */
+ #[CoversNothing]
+ #[Group('integration')]
 final class SuiteComplianceTest extends TestCaseBase
 {
     /** @dataProvider providerChecks */
@@ -119,7 +119,7 @@ final class SuiteComplianceTest extends TestCaseBase
 
 ### Every test has group
 
-Asserts that all tests have a `@group` annotation 
+Asserts that all tests have a `#[Group('x')]` attribute 
 
 :x:
 ```php
@@ -128,7 +128,9 @@ final class FooTest extends TestCase
 
 :heavy_check_mark:
 ```php
-/** @group unit */
+use PHPUnit\Framework\Attributes\Group;
+
+ #[Group('unit')]
 final class FooTest extends TestCase
 ```
 
@@ -145,12 +147,10 @@ yield 'Every test has group' => [
 Asserts that all test share same namespace with class they're testing.  
 Consider src namespace `Ns` and test namespace `Ns/Tests` then for test `Ns/Tests/UnitTest` must exist class `Ns/Unit`. 
 
-You can use `@covers` or `@coversDefaultClass` annotations to link test with tested class.  
-Use `@coversNothing` annotation to skip this check.
+You can use `#[CoversClass]` attribute to link test with tested class.  
+Use `#[CoversNothing]` attribute to skip this check.
 
-`#[CoversNothing]` and `#[CoversClass]` attributes are supported.
-
-Don't forget to enable `"forceCoversAnnotation="true"` in phpunit config file.
+Don't forget to enable `requireCoverageMetadata="true"` in phpunit config file.
 
 ```php
 namespace Ns;
@@ -181,7 +181,9 @@ final class UnitTest extends TestCase {}
 ```php
 namespace Ns\Tests\Sub;
 
-/** @covers \Ns\Unit */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+ #[CoversClass('\Ns\Unit')]
 final class UnitTest extends TestCase {}
 ```
 
