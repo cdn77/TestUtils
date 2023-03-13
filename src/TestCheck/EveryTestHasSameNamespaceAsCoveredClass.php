@@ -11,8 +11,6 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function class_exists;
-use function Safe\preg_match;
-use function Safe\preg_match_all;
 use function sprintf;
 use function strlen;
 use function strpos;
@@ -22,9 +20,6 @@ use function trait_exists;
 
 final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
 {
-    private const PatternCovers = '~\* @covers(DefaultClass)? +(?<coveredClass>.+?)(?:\n| \*/)~';
-    private const PatternCoversNothing = '~\* @coversNothing~';
-
     private string $testsNamespaceSuffix;
 
     /** @param iterable<string> $filePathNames */
@@ -43,15 +38,8 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
             $attributesCoversClass = $classReflection->getAttributes(CoversClass::class);
             $attributesCoversNothing = $classReflection->getAttributes(CoversNothing::class);
 
-            $docComment = $classReflection->getDocComment();
-            if ($docComment === false) {
-                $docComment = '';
-            }
-
-            $hasCovers = preg_match_all(self::PatternCovers, $docComment, $coversMatches) > 0
-                || $attributesCoversClass !== [];
-            $hasCoversNothing = preg_match(self::PatternCoversNothing, $docComment) === 1
-                || $attributesCoversNothing !== [];
+            $hasCovers = $attributesCoversClass !== [];
+            $hasCoversNothing = $attributesCoversNothing !== [];
 
             if ($hasCovers && $hasCoversNothing) {
                 $testCaseContext::fail(sprintf(
@@ -85,7 +73,7 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
             $testCaseContext::fail(
                 sprintf(
                     'Test "%s" is in the wrong namespace, ' .
-                    'has name different from tested class or is missing @covers annotation',
+                    'has name different from tested class or is missing CoversClass attribute',
                     $classReflection->getName(),
                 ),
             );

@@ -33,10 +33,6 @@ final class EveryTestHasGroupTest extends BaseTestCase
         yield 'required, supported' => ['WithGroups.php', ['a'], ['b']];
         yield 'no required, supported' => ['WithGroups.php', null, ['a', 'b']];
         yield 'no required, any supported' => ['WithGroups.php', null, null];
-        yield 'required, any supported - A' => ['WithGroupsAnnotations.php', ['a'], null];
-        yield 'required, supported - A' => ['WithGroupsAnnotations.php', ['a'], ['b']];
-        yield 'no required, supported - A' => ['WithGroupsAnnotations.php', null, ['a', 'b']];
-        yield 'no required, any supported - A' => ['WithGroupsAnnotations.php', null, null];
     }
 
     /**
@@ -65,6 +61,5 @@ final class EveryTestHasGroupTest extends BaseTestCase
     {
         yield 'has unsupported group, required' => ['WithGroups.php', null, []];
         yield 'has no group, required' => ['WithoutGroup.php', ['a'], null];
-        yield 'has unsupported group, required - A' => ['WithGroupsAnnotations.php', null, []];
     }
 }

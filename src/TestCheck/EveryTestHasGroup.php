@@ -13,7 +13,6 @@ use ReflectionClass;
 use function array_intersect;
 use function array_map;
 use function in_array;
-use function Safe\preg_match_all;
 use function sprintf;
 
 final class EveryTestHasGroup implements TestCheck
@@ -45,26 +44,10 @@ final class EveryTestHasGroup implements TestCheck
                 continue;
             }
 
-            $groupAttributes = $classReflection->getAttributes(Group::class);
-            if ($groupAttributes !== []) {
-                $groups = array_map(
-                    static fn ($groupAttribute) => $groupAttribute->getArguments()[0],
-                    $groupAttributes,
-                );
-            } else {
-                $docComment = $classReflection->getDocComment();
-                if ($docComment === false) {
-                    $testCaseContext::fail(sprintf('Test "%s" is missing phpdoc comment', $classReflection->getName()));
-                }
-
-                if (preg_match_all('~\* @group +(?<group>\w+)(\n| \*/)~', $docComment, $matches) === 0) {
-                    $testCaseContext::fail(
-                        sprintf('Test "%s" is missing @group annotation', $classReflection->getName()),
-                    );
-                }
-
-                $groups = $matches['group'];
-            }
+            $groups = array_map(
+                static fn ($groupAttribute) => $groupAttribute->getArguments()[0],
+                $classReflection->getAttributes(Group::class),
+            );
 
             $hasRequiredGroup = false;
             foreach ($groups as $group) {

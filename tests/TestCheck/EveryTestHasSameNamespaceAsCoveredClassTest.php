@@ -30,7 +30,6 @@ final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
                   'SameNamespaceAsLinkedCoveredClassTest.php',
                   'CoveredClassWithSomeWhitespaceTest.php',
                   'CoversNothingTest.php',
-                  'CoversDefaultClassTest.php',
               ];
 
               foreach ($files as $file) {
