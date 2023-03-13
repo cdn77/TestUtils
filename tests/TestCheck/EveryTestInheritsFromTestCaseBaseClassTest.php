@@ -22,7 +22,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     }
 
     /** @return Generator<list<string>> */
-    public function providerSuccess(): Generator
+    public static function providerSuccess(): Generator
     {
         yield ['ExtendsBase.php'];
         yield ['ExtendsBaseUsingParent.php'];
@@ -46,7 +46,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
     }
 
     /** @return Generator<list<string>> */
-    public function providerFail(): Generator
+    public static function providerFail(): Generator
     {
         yield ['DoesNotExtendAnything.php'];
         yield ['DoesNotExtendBase.php'];

@@ -100,7 +100,7 @@ final class SuiteComplianceTest extends TestCaseBase
     }
 
     /** @return Generator<string, array{callable(self): TestCheck}> */
-    public function providerChecks() : Generator
+    public static function providerChecks() : Generator
     {
         $testDir = ROOT_PROJECT_DIR . '/tests';
         $testFilePathNames = \Symfony\Component\Finder\Finder::create()

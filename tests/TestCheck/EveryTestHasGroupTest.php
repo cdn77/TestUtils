@@ -31,7 +31,7 @@ final class EveryTestHasGroupTest extends BaseTestCase
     }
 
     /** @return Generator<list<string>> */
-    public function providerFail(): Generator
+    public static function providerFail(): Generator
     {
         yield ['WithoutGroup.php'];
         yield ['WithUnlistedGroup.php'];
