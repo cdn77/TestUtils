@@ -11,6 +11,7 @@
     <testsuites>
         <testsuite name="Test Suite">
             <directory>tests</directory>
+            <exclude>tests/TestCheck/Fixtures/*</exclude>
         </testsuite>
     </testsuites>
     <coverage>
