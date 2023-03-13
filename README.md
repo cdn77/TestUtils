@@ -148,6 +148,8 @@ Consider src namespace `Ns` and test namespace `Ns/Tests` then for test `Ns/Test
 You can use `@covers` or `@coversDefaultClass` annotations to link test with tested class.  
 Use `@coversNothing` annotation to skip this check.
 
+`#[CoversNothing]` and `#[CoversClass]` attributes are supported.
+
 Don't forget to enable `"forceCoversAnnotation="true"` in phpunit config file.
 
 ```php

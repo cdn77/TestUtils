@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$className of attribute class PHPUnit\\\\Framework\\\\Attributes\\\\CoversClass constructor expects class\\-string, string given\\.$#"
+			count: 2
+			path: tests/TestCheck/Fixtures/EveryTestHasSameNamespaceAsCoveredClass/tests/IgnoreMultipleCoversTest.php

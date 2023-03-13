@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Cdn77\TestUtils\TestCheck;
 
 use Cdn77\EntityFqnExtractor\ClassExtractor;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -38,22 +40,27 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
         foreach ($this->filePathNames as $file) {
             $classReflection = new ReflectionClass(ClassExtractor::get($file));
 
+            $attributesCoversClass = $classReflection->getAttributes(CoversClass::class);
+            $attributesCoversNothing = $classReflection->getAttributes(CoversNothing::class);
+
             $docComment = $classReflection->getDocComment();
             if ($docComment === false) {
                 $docComment = '';
             }
 
-            $matchesCovers = preg_match_all(self::PatternCovers, $docComment, $coversMatches) > 0;
-            $matchesCoversNothing = preg_match(self::PatternCoversNothing, $docComment) === 1;
+            $hasCovers = preg_match_all(self::PatternCovers, $docComment, $coversMatches) > 0
+                || $attributesCoversClass !== [];
+            $hasCoversNothing = preg_match(self::PatternCoversNothing, $docComment) === 1
+                || $attributesCoversNothing !== [];
 
-            if ($matchesCovers && $matchesCoversNothing) {
+            if ($hasCovers && $hasCoversNothing) {
                 $testCaseContext::fail(sprintf(
-                    'Test file "%s" contains both @covers and @coversNothing annotations.',
+                    'Specifying CoversClass and CoversNothing attributes at the same time makes no sense (in "%s").',
                     $file,
                 ));
             }
 
-            if ($matchesCoversNothing || $matchesCovers) {
+            if ($hasCoversNothing || $hasCovers) {
                 continue;
             }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\TestUtils\TestCheck;
 
 use Cdn77\EntityFqnExtractor\ClassExtractor;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -25,6 +26,26 @@ final class EveryTestHasGroup implements TestCheck
     {
         foreach ($this->filePathNames as $filePathName) {
             $classReflection = new ReflectionClass(ClassExtractor::get($filePathName));
+            if ($classReflection->isAbstract()) {
+                continue;
+            }
+
+            $groupAttributes = $classReflection->getAttributes(Group::class);
+            foreach ($groupAttributes as $groupAttribute) {
+                $testCaseContext::assertContains(
+                    $groupAttribute->getArguments()[0],
+                    $this->allowedGroups,
+                    sprintf(
+                        'Test "%s" has invalid @group annotation "%s"',
+                        $classReflection->getName(),
+                        $groupAttribute->getArguments()[0],
+                    ),
+                );
+            }
+
+            if ($groupAttributes !== []) {
+                continue;
+            }
 
             $this->validateDocComment($testCaseContext, $classReflection);
         }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Cdn77\TestUtils\Tests\TestCheck\Fixtures;
 
-/** @group unit */
+use PHPUnit\Framework\Attributes\Group;
+
+#[Group('unit')]
 final class WithGroup
 {
 }
