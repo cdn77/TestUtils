@@ -89,7 +89,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @group       integration
- * @testedClass none
+ * @coversNothing
  */
 final class SuiteComplianceTest extends TestCaseBase
 {
@@ -188,54 +188,6 @@ Configured in test provider as
 ```php
 yield 'Every test has same namespace as tested class' => [
     new EveryTestHasSameNamespaceAsCoveredClass($testFiles),
-];
-```
-
-### Every test has same namespace as tested class
-
-Asserts that all test share same namespace with class they're testing.  
-Consider src namespace `Ns` and test namespace `Ns/Tests` then for test `Ns/Tests/UnitTest` must exist class `Ns/Unit`. 
-
-You can use `@testedClass` annotation to link test with tested class
-
-```php
-namespace Ns;
-
-final class Unit {} 
-```
-
-:x:
-```php
-namespace Ns\Tests;
-
-final class NonexistentUnitTest extends TestCase {}
-```
-
-```php
-namespace Ns\Tests\Sub;
-
-final class UnitTest extends TestCase {}
-```
-
-:heavy_check_mark:
-```php
-namespace Ns\Tests;
-
-final class UnitTest extends TestCase {}
-```
-
-```php
-namespace Ns\Tests\Sub;
-
-/** @testedClass \Ns\Unit */
-final class UnitTest extends TestCase {}
-```
-
-Configured in test provider as
-
-```php
-yield 'Every test has same namespace as tested class' => [
-    new EveryTestHasSameNamespaceAsTestedClass($testFiles),
 ];
 ```
 
