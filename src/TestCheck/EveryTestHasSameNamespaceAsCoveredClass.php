@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cdn77\TestUtils\TestCheck;
 
-use Cdn77\EntityFqnExtractor\ClassExtractor;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
@@ -32,8 +31,13 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
     {
         $testCaseContext::assertTrue(true);
 
-        foreach ($this->filePathNames as $file) {
-            $classReflection = new ReflectionClass(ClassExtractor::get($file));
+        foreach ($this->filePathNames as $filePathName) {
+            $className = ClassExtractor::extractFromFile($filePathName);
+            if ($className === null) {
+                $testCaseContext::fail(sprintf('No class found in file "%s"', $filePathName));
+            }
+
+            $classReflection = new ReflectionClass($className);
 
             $attributesCoversClass = $classReflection->getAttributes(CoversClass::class);
             $attributesCoversNothing = $classReflection->getAttributes(CoversNothing::class);
@@ -44,7 +48,7 @@ final class EveryTestHasSameNamespaceAsCoveredClass implements TestCheck
             if ($hasCovers && $hasCoversNothing) {
                 $testCaseContext::fail(sprintf(
                     'Specifying CoversClass and CoversNothing attributes at the same time makes no sense (in "%s").',
-                    $file,
+                    $filePathName,
                 ));
             }
 
