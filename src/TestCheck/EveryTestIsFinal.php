@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cdn77\TestUtils\TestCheck;
 
-use Cdn77\EntityFqnExtractor\ClassExtractor;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -20,7 +19,13 @@ final class EveryTestIsFinal implements TestCheck
     public function run(TestCase $testCaseContext): void
     {
         foreach ($this->filePathNames as $filePathName) {
-            $classReflection = new ReflectionClass(ClassExtractor::get($filePathName));
+            $className = ClassExtractor::extractFromFile($filePathName);
+            if ($className === null) {
+                $testCaseContext::fail(sprintf('No class found in file "%s"', $filePathName));
+            }
+
+            $classReflection = new ReflectionClass($className);
+
             $testCaseContext::assertTrue(
                 $classReflection->isFinal(),
                 sprintf('Test %s is missing "final" class keyword', $classReflection->getName()),
