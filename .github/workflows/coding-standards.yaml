@@ -24,7 +24,7 @@ jobs:
           tools: "cs2pr, pecl"
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@v2"
 
       - name: "Run PHP_CodeSniffer"
         run: "vendor/bin/phpcs -q --no-colors --report=checkstyle | cs2pr"
