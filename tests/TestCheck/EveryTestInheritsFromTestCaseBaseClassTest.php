@@ -8,10 +8,11 @@ use Cdn77\TestUtils\TestCheck\EveryTestInheritsFromTestCaseBaseClass;
 use Cdn77\TestUtils\Tests\BaseTestCase;
 use Generator;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
 {
-    /** @dataProvider providerSuccess */
+    #[DataProvider('providerSuccess')]
     public function testSuccess(string $filePath): void
     {
         $check = new EveryTestInheritsFromTestCaseBaseClass(
@@ -29,7 +30,7 @@ final class EveryTestInheritsFromTestCaseBaseClassTest extends BaseTestCase
         yield ['../../BaseTestCase.php'];
     }
 
-    /** @dataProvider providerFail */
+    #[DataProvider('providerFail')]
     public function testFail(string $filePath): void
     {
         try {

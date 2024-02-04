@@ -8,10 +8,11 @@ use Cdn77\TestUtils\TestCheck\EveryTestHasSameNamespaceAsCoveredClass;
 use Cdn77\TestUtils\Tests\BaseTestCase;
 use Generator;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
 {
-    /** @dataProvider providerSuccess */
+    #[DataProvider('providerSuccess')]
     public function testSuccess(string $filePath): void
     {
         $check = new EveryTestHasSameNamespaceAsCoveredClass(
@@ -37,7 +38,7 @@ final class EveryTestHasSameNamespaceAsCoveredClassTest extends BaseTestCase
               }
     }
 
-    /** @dataProvider providerFail */
+    #[DataProvider('providerFail')]
     public function testFail(string $filePath, string $error): void
     {
         $this->expectException(AssertionFailedError::class);

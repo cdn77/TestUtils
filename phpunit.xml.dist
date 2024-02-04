@@ -8,6 +8,10 @@
     executionOrder="random"
     colors="true"
     bootstrap="tests/bootstrap.php"
+    failOnEmptyTestSuite="true"
+    failOnDeprecation="true"
+    failOnNotice="true"
+    failOnWarning="true"
 >
     <testsuites>
         <testsuite name="Test Suite">

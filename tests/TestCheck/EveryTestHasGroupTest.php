@@ -8,15 +8,15 @@ use Cdn77\TestUtils\TestCheck\EveryTestHasGroup;
 use Cdn77\TestUtils\Tests\BaseTestCase;
 use Generator;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 final class EveryTestHasGroupTest extends BaseTestCase
 {
     /**
      * @param non-empty-list<string>|null $requiredGroups
      * @param list<string>|null $supportedGroups
-     *
-     * @dataProvider providerSuccess
      */
+    #[DataProvider('providerSuccess')]
     public function testSuccess(
         string $filePath,
         array|null $requiredGroups,
@@ -38,9 +38,8 @@ final class EveryTestHasGroupTest extends BaseTestCase
     /**
      * @param non-empty-list<string>|null $requiredGroups
      * @param list<string>|null $supportedGroups
-     *
-     * @dataProvider providerFail
      */
+    #[DataProvider('providerFail')]
     public function testFail(
         string $filePath,
         array|null $requiredGroups,
