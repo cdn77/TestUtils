@@ -1,7 +1,6 @@
 # Cdn77 TestUtils
 
 [![GitHub Actions][GA Image]][GA Link]
-[![Shepherd Type][Shepherd Image]][Shepherd Link]
 [![Code Coverage][Coverage Image]][CodeCov Link]
 [![Downloads][Downloads Image]][Packagist Link]
 [![Packagist][Packagist Image]][Packagist Link]
@@ -249,10 +248,6 @@ yield 'Every test is final' => [
 [GA Image]: https://github.com/cdn77/TestUtils/workflows/CI/badge.svg
 
 [GA Link]: https://github.com/cdn77/TestUtils/actions?query=workflow%3A%22CI%22+branch%3Amaster
-
-[Shepherd Image]: https://shepherd.dev/github/cdn77/TestUtils/coverage.svg
-
-[Shepherd Link]: https://shepherd.dev/github/cdn77/TestUtils
 
 [Coverage Image]: https://codecov.io/gh/cdn77/TestUtils/branch/master/graph/badge.svg
 
