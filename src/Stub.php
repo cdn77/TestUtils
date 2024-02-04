@@ -108,8 +108,8 @@ final class Stub
         $properties = array_merge($reflection->getProperties(), $properties);
 
         /**
-         * @psalm-template T of object
-         * @psalm-var ReflectionClass<T>|false $parentClass
+         * @phpstan-template T of object
+         * @phpstan-var ReflectionClass<T>|false $parentClass
          */
         $parentClass = $reflection->getParentClass();
         if ($parentClass === false) {

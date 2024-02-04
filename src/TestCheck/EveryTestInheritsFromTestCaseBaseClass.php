@@ -31,7 +31,7 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
 
             $classReflection = new ReflectionClass($className);
 
-            /** @psalm-var ReflectionClass<TestCase>|false $parentClassReflection */
+            /** @phpstan-var ReflectionClass<TestCase>|false $parentClassReflection */
             $parentClassReflection = $classReflection->getParentClass();
             if ($parentClassReflection === false) {
                 $testCaseContext::fail(
@@ -64,7 +64,7 @@ final class EveryTestInheritsFromTestCaseBaseClass implements TestCheck
             return;
         }
 
-            /** @psalm-var ReflectionClass<TestCase>|false $parentClassReflection */
+            /** @phpstan-var ReflectionClass<TestCase>|false $parentClassReflection */
         $parentClassReflection = $parentClassReflection->getParentClass();
         if ($parentClassReflection === false) {
             $testCaseContext::fail(

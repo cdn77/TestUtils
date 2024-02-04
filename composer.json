@@ -33,10 +33,7 @@
         "phpstan/phpstan-phpunit": "^1",
         "phpstan/phpstan-strict-rules": "^1",
         "phpunit/phpunit": "^10.1",
-        "psalm/plugin-phpunit": "^0.18.0",
-        "roave/infection-static-analysis-plugin": "^1.7",
-        "thecodingmachine/phpstan-safe-rule": "^1.0",
-        "vimeo/psalm": "^5.0"
+        "thecodingmachine/phpstan-safe-rule": "^1.0"
     },
     "config": {
         "allow-plugins": {
