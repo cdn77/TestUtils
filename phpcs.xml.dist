@@ -5,7 +5,7 @@
 >
     <arg name="cache" value=".phpcs-cache" />
 
-    <config name="php_version" value="82000"/>
+    <config name="php_version" value="80200"/>
 
     <rule ref="Cdn77" />
 
