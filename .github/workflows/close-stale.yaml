@@ -18,7 +18,6 @@ jobs:
         uses: actions/stale@v9
         with:
           stale-issue-label: stale
-          exempt-all-assignees: true
 
           days-before-issue-stale: 30
           stale-issue-message: |
