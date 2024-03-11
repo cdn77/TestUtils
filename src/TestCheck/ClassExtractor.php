@@ -22,7 +22,7 @@ final class ClassExtractor
             static fn (string $className) => str_ends_with(
                 $className,
                 '\\' . $fileInfo->getBasename('.php'),
-            )
+            ),
         );
 
         $index = array_key_first($files);
