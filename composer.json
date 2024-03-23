@@ -22,8 +22,7 @@
     "require": {
         "php": "^8.2",
         "league/construct-finder": "^1.2",
-        "phpunit/phpunit": "^10.1 || ^11",
-        "thecodingmachine/safe": "^2"
+        "phpunit/phpunit": "^10.1 || ^11"
     },
     "require-dev": {
         "cdn77/coding-standard": "^7.0",
@@ -31,8 +30,7 @@
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^1",
         "phpstan/phpstan-phpunit": "^1",
-        "phpstan/phpstan-strict-rules": "^1",
-        "thecodingmachine/phpstan-safe-rule": "^1.0"
+        "phpstan/phpstan-strict-rules": "^1"
     },
     "config": {
         "allow-plugins": {
