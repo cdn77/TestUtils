@@ -15,8 +15,7 @@
     "autoload-dev": {
         "psr-4": {
             "Cdn77\\TestUtils\\Tests\\": "tests/",
-            "Cdn77\\TestUtils\\Tests\\Tests\\TestCheck\\Fixtures\\EveryTestHasSameNamespaceAsCoveredClass\\": "tests/TestCheck/Fixtures/EveryTestHasSameNamespaceAsCoveredClass/tests",
-            "Cdn77\\TestUtils\\Tests\\Tests\\TestCheck\\Fixtures\\EveryTestHasSameNamespaceAsTestedClass\\": "tests/TestCheck/Fixtures/EveryTestHasSameNamespaceAsTestedClass/tests"
+            "Cdn77\\TestUtils\\Tests\\Tests\\TestCheck\\Fixtures\\EveryTestHasSameNamespaceAsCoveredClass\\": "tests/TestCheck/Fixtures/EveryTestHasSameNamespaceAsCoveredClass/tests"
         }
     },
     "require": {
