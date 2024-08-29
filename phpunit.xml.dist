@@ -4,7 +4,6 @@
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutOutputDuringTests="true"
-    beStrictAboutTodoAnnotatedTests="true"
     executionOrder="random"
     colors="true"
     bootstrap="tests/bootstrap.php"
@@ -13,16 +12,18 @@
     failOnNotice="true"
     failOnWarning="true"
 >
-    <testsuites>
-        <testsuite name="Test Suite">
-            <directory>tests</directory>
-            <exclude>tests/TestCheck/Fixtures/*</exclude>
-        </testsuite>
-    </testsuites>
-    <coverage />
-    <source>
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </source>
+  <testsuites>
+    <testsuite name="Test Suite">
+      <directory>tests</directory>
+      <exclude>tests/TestCheck/Fixtures/*</exclude>
+    </testsuite>
+  </testsuites>
+
+  <coverage />
+
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
 </phpunit>
