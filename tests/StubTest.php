@@ -18,7 +18,7 @@ final class StubTest extends BaseTestCase
 
         $stub = Stub::create(SimpleClass::class);
 
-        $stub->getProperty1();
+        $x = $stub->getProperty1();
     }
 
     public function testPropertyIsSetBypassingConstructor(): void

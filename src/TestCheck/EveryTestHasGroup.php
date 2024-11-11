@@ -48,6 +48,7 @@ final class EveryTestHasGroup implements TestCheck
                 continue;
             }
 
+            /** @var array<string> $groups */
             $groups = array_map(
                 static fn ($groupAttribute) => $groupAttribute->getArguments()[0],
                 $classReflection->getAttributes(Group::class),
