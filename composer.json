@@ -21,7 +21,7 @@
     "require": {
         "php": "^8.2",
         "league/construct-finder": "^1.4",
-        "phpunit/phpunit": "^10.1 || ^11"
+        "phpunit/phpunit": "^11 || ^12"
     },
     "require-dev": {
         "cdn77/coding-standard": "^7.0",
