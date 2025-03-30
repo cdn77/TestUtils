@@ -13,10 +13,12 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      # https://github.com/marketplace/actions/close-stale-issues
+        # https://github.com/marketplace/actions/close-stale-issues
       - name: Close stale issues
         uses: actions/stale@v9
         with:
+          exempt-assignees: "simPod"
+
           stale-issue-label: stale
 
           days-before-issue-stale: 30
