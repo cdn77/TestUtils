@@ -25,7 +25,7 @@
     },
     "require-dev": {
         "cdn77/coding-standard": "^7.0",
-        "infection/infection": "^0.30.0",
+        "infection/infection": "^0.31.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^2",
         "phpstan/phpstan-phpunit": "^2",
