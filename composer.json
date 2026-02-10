@@ -19,9 +19,9 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "league/construct-finder": "^1.4",
-        "phpunit/phpunit": "^11 || ^12"
+        "phpunit/phpunit": "^12 || ^13"
     },
     "require-dev": {
         "cdn77/coding-standard": "^7.0",

@@ -34,7 +34,6 @@ final class Stub
                 throw new ReflectionException(sprintf('Property "%s" not found', $property));
             }
 
-            $reflectionProperty->setAccessible(true);
             $reflectionProperty->setValue($stub, $value);
         }
 
@@ -59,7 +58,6 @@ final class Stub
         /** @var array<string, mixed> $properties */
         $properties = [];
         foreach (self::getAllProperties($reflection) as $property) {
-            $property->setAccessible(true);
             if (! $property->isInitialized($stub)) {
                 continue;
             }

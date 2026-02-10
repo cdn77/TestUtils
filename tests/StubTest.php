@@ -9,6 +9,8 @@ use Cdn77\TestUtils\Tests\Fixture\ClassWithReadonlyProperty;
 use Error;
 use ReflectionException;
 
+use const PHP_VERSION_ID;
+
 final class StubTest extends BaseTestCase
 {
     public function testValueIsDefaultWhenNotSet(): void
@@ -67,9 +69,16 @@ final class StubTest extends BaseTestCase
         self::assertSame('value', $stub->parentReadonlyProperty());
     }
 
-    /** PHP does not allow setting protected or public readonly properties from different scopes */
+    /** PHP < 8.4 does not allow setting public readonly properties from different scopes */
     public function testPublicReadonlyPropertyCannotBeSet(): void
     {
+        if (PHP_VERSION_ID >= 80400) {
+            $stub = Stub::create(ClassWithReadonlyProperty::class, ['parentPublicReadonlyProperty' => 'value']);
+            self::assertSame('value', $stub->parentPublicReadonlyProperty);
+
+            return;
+        }
+
         try {
             Stub::create(ClassWithReadonlyProperty::class, ['parentPublicReadonlyProperty' => 'value']);
         } catch (Error $e) {

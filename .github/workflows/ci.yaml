@@ -13,15 +13,17 @@ jobs:
     runs-on: "ubuntu-24.04"
 
     strategy:
+      fail-fast: false
       matrix:
         php-version:
-          - "8.2"
           - "8.3"
+          - "8.4"
+          - "8.5"
         dependencies:
           - "highest"
         include:
           - dependencies: "lowest"
-            php-version: "8.2"
+            php-version: "8.3"
 
     steps:
       - name: "Checkout"
