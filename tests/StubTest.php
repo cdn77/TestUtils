@@ -9,6 +9,8 @@ use Cdn77\TestUtils\Tests\Fixture\ClassWithReadonlyProperty;
 use Error;
 use ReflectionException;
 
+use const PHP_VERSION_ID;
+
 final class StubTest extends BaseTestCase
 {
     public function testValueIsDefaultWhenNotSet(): void
